@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 8
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 8
+        versionCode rootProject.ext.mobApiVersionCode
+        versionName rootProject.ext.mobApiVersionName
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles 'proguard-project.txt'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
