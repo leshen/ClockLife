@@ -51,9 +51,15 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.aurelhubert:ahbottomnavigation:2.0.6'
+    compile project(':XunFeiLib')
+    compile project(':IMLib')
+    compile project(':MobAPI')
 }
 repositories {
 //    mavenCentral()
     jcenter()
     maven { url "https://jitpack.io" }
+    flatDir {
+        dirs 'libs' , '../MobAPI/libs' //第一个libs是主项目的libs,其他module的libs路径需要用逗号隔开../module名/libs
+    }
 }

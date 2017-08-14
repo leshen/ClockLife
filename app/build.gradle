@@ -41,8 +41,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':slmodule')
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    //    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
     testCompile 'junit:junit:4.12'
-    compile project(':MobAPI')
+}
+repositories {
+//    mavenCentral()
+    jcenter()
+    maven { url "https://jitpack.io" }
+    flatDir {
+        dirs 'libs' , '../MobAPI/libs' //第一个libs是主项目的libs,其他module的libs路径需要用逗号隔开../module名/libs
+    }
 }

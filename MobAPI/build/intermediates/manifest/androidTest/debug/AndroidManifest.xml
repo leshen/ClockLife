@@ -13,7 +13,7 @@
         android:label="Tests for com.mob.mobapi.test"
         android:targetPackage="com.mob.mobapi.test" />
 
-    <application>
+    <application android:allowBackup="true" >
         <uses-library android:name="android.test.runner" />
     </application>
 

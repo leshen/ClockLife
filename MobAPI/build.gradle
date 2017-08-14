@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 8
@@ -27,4 +28,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile (name:'SMSSDK-3.0.0',ext:'aar')
+}
+repositories {
+    mavenCentral()
+    flatDir{
+        dirs 'libs' //就是你放aar的目录地址
+    }
 }

@@ -1,1 +1,1 @@
-include ':app', ':slmodule', ':MobAPI'
+include ':app', ':slmodule', ':MobAPI', ':XunFeiLib', ':IMLib'

@@ -8,7 +8,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/IMLib" />
             <option value="$PROJECT_DIR$/MobAPI" />
+            <option value="$PROJECT_DIR$/XunFeiLib" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/slmodule" />
           </set>

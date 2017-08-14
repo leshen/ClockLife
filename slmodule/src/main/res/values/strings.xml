@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">slModule</string>
+    <string name="MobAppKey">1ff220fe3b08c</string>
+    <string name="MobAppSecret">c0946f65653be15281d289286001960b</string>
+    <string name="RonYunAppKey">sfci50a7s1zai</string>//测试环境
+    <string name="XunFeiAppKey">c936aaf92fe4e92876c2018f69c2dc97</string>
+
+
     <string name="title_activity_base_main">BaseMainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

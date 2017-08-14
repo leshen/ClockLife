@@ -1,20 +1,18 @@
 package clocklife.shenle.com
 
-import android.content.Intent
 import clocklife.shenle.com.one.fragment.*
-import slmodule.shenle.com.BaseActivity
 import slmodule.shenle.com.BaseFragment
 import slmodule.shenle.com.BaseMainActivity
+import slmodule.shenle.com.utils.UIUtils
 
 class MainActivity : BaseMainActivity() {
     override fun getMenuStrResArr(): IntArray {
-        return intArrayOf(R.string.menu_a,R.string.menu_a,R.string.menu_a,R.string.menu_a,R.string.menu_a)
+        return intArrayOf(R.string.menu_a,R.string.menu_b,R.string.menu_c,R.string.menu_d,R.string.menu_e)
     }
 
     companion object {
-        fun goHere(activity: BaseActivity){
-//            activity.startActivity(Intent(activity,MainActivity::class.java))
-            activity.startActivity(MainActivity::class.java)
+        fun goHere(){
+            UIUtils.startActivity(MainActivity::class.java)
         }
     }
     override fun getListFragment(): List<BaseFragment> {

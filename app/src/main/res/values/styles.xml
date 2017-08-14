@@ -4,4 +4,109 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@mipmap/welcome_page</item>
     </style>
+
+    <!-- 普通文字-->
+    <style name="NomorlText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_32</item>
+        <item name="android:textColor">@color/text_color_1</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 普通文字-->
+    <style name="NomorlText24">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_24</item>
+        <item name="android:textColor">@color/text_color_1</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 普通文字-->
+    <style name="NomorlText24Red">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_24</item>
+        <item name="android:textColor">@color/text_color_2</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 普通文字-->
+    <style name="NomorlText24Gray">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_24</item>
+        <item name="android:textColor">@color/text_color_4</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 普通文字-->
+    <style name="NomorlText24Gray3">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_24</item>
+        <item name="android:textColor">@color/text_color_3</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 普通文字-->
+    <style name="NomorlText28">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_28</item>
+        <item name="android:textColor">@color/text_color_1</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 普通文字-->
+    <style name="NomorlText28Gray">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_28</item>
+        <item name="android:textColor">@color/text_color_4</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- 普通文字-->
+    <style name="NomorlText28Gray3">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_28</item>
+        <item name="android:textColor">@color/text_color_3</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 普通文字-->
+    <style name="NomorlText28Red">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_28</item>
+        <item name="android:textColor">@color/text_color_2</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 普通文字-->
+    <style name="NomorlText32Red">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_32</item>
+        <item name="android:textColor">@color/text_color_2</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 普通文字-->
+    <style name="NomorlText32White">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_32</item>
+        <item name="android:textColor">@color/text_color_5</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 所有页面的底部提交按钮 -->
+    <style name="BottomSubmitButtom">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@drawable/selector_submit</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textSize">@dimen/text_size_32</item>
+        <item name="android:textColor">@color/text_color_5</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

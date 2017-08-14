@@ -25,14 +25,14 @@ import kotlinx.android.synthetic.main.content_base_main.*
 
 abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun getRootView(): Int{
         val enabledTranslucentNavigation = getSharedPreferences("shared", Context.MODE_PRIVATE)
                 .getBoolean("translucentNavigation", false)
         setTheme(if (enabledTranslucentNavigation) R.style.AppTheme_TranslucentNavigation else R.style.AppTheme)
-        setContentView(R.layout.activity_base_main)
+        return R.layout.activity_base_main
+    }
+    override fun initOnCreate(savedInstanceState: Bundle?) {
         setSupportActionBar(toolbar)
-
         fab.setOnClickListener{
             Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()

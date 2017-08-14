@@ -28,3 +28,21 @@
 # SMSSDK mob
 -dontwarn com.mob.**
 -keep class com.mob.**{*;}
+
+-dontwarn cn.smssdk.**
+-keep class cn.smssdk.**{*;}
+
+
+#融云 SDK 支持小米和 GCM 推送，SDK 内部帮用户做了部分集成， 所以在您没有集成这几个第三方 jar 包时， 会有一些告警，混淆时加入下面语句即可：
+-dontwarn io.rong.push.**
+ -dontnote com.xiaomi.**
+-dontnote com.google.android.gms.gcm.**
+ -dontnote io.rong.**
+#另外，你需要 keep 自定义的 BroadcastReceiver。自定义的 BroadcastReceiver 继承PushMessageReceiver，使用下面的代码是不行的。
+-keep public class * extends android.content.BroadcastReceiver
+#你需要使用下面的代码 keep 自定义的 BroadcastReceiver。
+-keep class clocklife.shenle.com.base.message.RonYunNotificationReceiver {*;}
+
+
+#讯飞统计
+-keep class com.iflytek.sunflower.**{*;}

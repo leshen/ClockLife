@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import com.trello.rxlifecycle2.components.support.RxFragment
 import android.view.animation.AnimationUtils
 import android.view.animation.Animation
-
+import com.iflytek.sunflower.FlowerCollector
+import slmodule.shenle.com.utils.UIUtils
 
 
 /**
@@ -49,5 +50,22 @@ abstract class BaseFragment : RxFragment() {
         if (isHid) {
             willBeDisplayed()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        FlowerCollector.onResume(activity)
+        FlowerCollector.onPageStart(javaClass.simpleName)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        FlowerCollector.onPageEnd(javaClass.simpleName) //请确保 onPageEnd 在onPause 之前调用。
+        FlowerCollector.onPause(activity)
+    }
+
+    override fun onDestroyView() {
+        UIUtils.unbindDrawables(view)
+        super.onDestroyView()
     }
 }
