@@ -1,0 +1,62 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+From CMSSDK:
+* proguard-project.txt
+From CMSSDK-GUI:
+* proguard-project.txt
+From MobDependency:
+* proguard-project.txt
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+In MobDependency:
+* AndroidManifest.xml => mobDependency\src\main\AndroidManifest.xml
+* assets\ => mobDependency\src\main\assets\
+* libs\Jimu-2017.0807.1541.jar => mobDependency\libs\Jimu-2017.0807.1541.jar
+* libs\MobCommons-2017.0807.1541.jar => mobDependency\libs\MobCommons-2017.0807.1541.jar
+* libs\MobTools-2017.0807.1541.jar => mobDependency\libs\MobTools-2017.0807.1541.jar
+* libs\ShareSDK-Core-3.0.0.jar => mobDependency\libs\ShareSDK-Core-3.0.0.jar
+* libs\ShareSDK-Facebook-3.0.0.jar => mobDependency\libs\ShareSDK-Facebook-3.0.0.jar
+* libs\ShareSDK-QQ-3.0.0.jar => mobDependency\libs\ShareSDK-QQ-3.0.0.jar
+* libs\ShareSDK-SinaWeibo-3.0.0.jar => mobDependency\libs\ShareSDK-SinaWeibo-3.0.0.jar
+* libs\ShareSDK-Wechat-3.0.0.jar => mobDependency\libs\ShareSDK-Wechat-3.0.0.jar
+* libs\ShareSDK-Wechat-Core-3.0.0.jar => mobDependency\libs\ShareSDK-Wechat-Core-3.0.0.jar
+* libs\SMSSDK-3.0.0.jar => mobDependency\libs\SMSSDK-3.0.0.jar
+* libs\UMSSDK-1.0.0.jar => mobDependency\libs\UMSSDK-1.0.0.jar
+* res\ => mobDependency\src\main\res\
+* src\ => mobDependency\src\main\java\
+In CMSSDK:
+* AndroidManifest.xml => cMSSDK\src\main\AndroidManifest.xml
+* libs\CMSSDK-1.0.0.jar => cMSSDK\libs\CMSSDK-1.0.0.jar
+* res\ => cMSSDK\src\main\res\
+* src\ => cMSSDK\src\main\java
+In CMSSDK-GUI:
+* AndroidManifest.xml => CMSSDKGUI\src\main\AndroidManifest.xml
+* assets\ => CMSSDKGUI\src\main\assets\
+* res\ => CMSSDKGUI\src\main\res\
+* src\ => CMSSDKGUI\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)
