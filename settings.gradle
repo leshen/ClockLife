@@ -1,1 +1,2 @@
 include ':app', ':slmodule', ':MobAPI', ':XunFeiLib', ':IMLib'
+include ':CMSSDKGUI'

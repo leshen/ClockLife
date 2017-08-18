@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ff5000</color>
-    <color name="colorPrimaryDark">#e74b04</color>
-    <color name="colorAccent">#ff5000</color>
 <!--*********************************************************猪易通用过**************************************************************** -->
     <!-- 背景1 橘红-首页顶部背景色 -->
     <color name="bg_1">#ff5000</color>

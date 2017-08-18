@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager
 import android.support.v4.view.animation.LinearOutSlowInInterpolator
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -24,6 +25,9 @@ import kotlinx.android.synthetic.main.content_base_main.*
 
 
 abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+    override fun initToolBar(): Toolbar? {
+        return toolbar
+    }
 
     override fun getRootView(): Int{
         val enabledTranslucentNavigation = getSharedPreferences("shared", Context.MODE_PRIVATE)
@@ -32,7 +36,7 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
         return R.layout.activity_base_main
     }
     override fun initOnCreate(savedInstanceState: Bundle?) {
-        setSupportActionBar(toolbar)
+//        setSupportActionBar(toolbar)
         fab.setOnClickListener{
             Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
@@ -45,9 +49,13 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
         toggle.syncState()
 
         val navigationView = findViewById(R.id.nav_view) as NavigationView
+        initNavHeaderView(navigationView)
         navigationView.setNavigationItemSelectedListener(this)
         initBottom()
     }
+
+    abstract fun initNavHeaderView(navigationView: NavigationView)
+
     var currentFragment:BaseFragment?=null
     var oldFragment:BaseFragment?=null
     private var isMakeScrollow: Int=0
@@ -247,24 +255,12 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
         return super.onOptionsItemSelected(item)
     }
 
+//
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        val id = item.itemId
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
+        on2NavigationItemSelected(item)
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
+    abstract fun on2NavigationItemSelected(item: MenuItem)
 }

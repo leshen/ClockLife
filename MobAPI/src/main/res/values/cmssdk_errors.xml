@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="cmssdk_error_421">appkey不存在</string>
+	<string name="cmssdk_error_422">app请求服务器的开关为关闭</string>
+	<string name="cmssdk_error_423">请求数据体格式错误</string>
+	<string name="cmssdk_error_424">请求中不存在appkey字段</string>
+	<string name="cmssdk_error_425">请求体中的appkey的值为空</string>
+	<string name="cmssdk_error_426">请求体中的appkey和header中的appkey不同</string>
+	<string name="cmssdk_error_427">请求体中的duid不存在</string>
+	<string name="cmssdk_error_428">请求体中的duid的值为空</string>
+	<string name="cmssdk_error_429">请求体中的articleId为空</string>
+	<string name="cmssdk_error_430">token缺失</string>
+	<string name="cmssdk_error_431">用户信息缺少参数</string>
+	<string name="cmssdk_error_432">token不存在</string>
+	<string name="cmssdk_error_433">token非法</string>
+	<string name="cmssdk_error_434">请求体中的content为空</string>
+	<string name="cmssdk_error_435">文章不存在</string>
+	<string name="cmssdk_error_436">Query中提交的显示字段有服务器不支持的字段</string>
+	<string name="cmssdk_error_437">Query中提交的排序字段有服务器不支持的字段</string>
+	<string name="cmssdk_error_438">Query中提交的数据缺少target属性</string>
+	<string name="cmssdk_error_439">Query不存在</string>
+	<string name="cmssdk_error_440">用户被禁止评论</string>
+	<string name="cmssdk_error_441">应用没有开启评论权限</string>
+	<string name="cmssdk_error_442">文章没有开启评论权限</string>
+	<string name="cmssdk_error_443">此类型文章没有评论功能</string>
+	<string name="cmssdk_error_444">评论内容长度超过120字</string>
+	<string name="cmssdk_error_445">请求数据中没有平台</string>
+	<string name="cmssdk_error_446">不能重复称赞同一片文章</string>
+	<string name="cmssdk_error_447">预览字符串不存在或者超时</string>
+</resources>

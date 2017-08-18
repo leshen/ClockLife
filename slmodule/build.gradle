@@ -8,14 +8,12 @@ def dbflow_version = "4.0.3"
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
-
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -23,6 +21,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    productFlavors {
     }
 }
 
@@ -53,13 +53,19 @@ dependencies {
     compile 'com.aurelhubert:ahbottomnavigation:2.0.6'
     compile project(':XunFeiLib')
     compile project(':IMLib')
-    compile project(':MobAPI')
+    compile project(':CMSSDKGUI')
+    compile 'com.android.support:multidex:1.0.1'
+    //    compile 'com.github.bumptech.glide:glide:4.0.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    kapt 'com.github.bumptech.glide:compiler:4.0.0'
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
+    // If you want to use the GPU Filters
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
 }
 repositories {
-//    mavenCentral()
+
+    //    mavenCentral()
     jcenter()
-    maven { url "https://jitpack.io" }
-    flatDir {
-        dirs 'libs' , '../MobAPI/libs' //第一个libs是主项目的libs,其他module的libs路径需要用逗号隔开../module名/libs
-    }
+    maven { url 'https://jitpack.io' }
 }

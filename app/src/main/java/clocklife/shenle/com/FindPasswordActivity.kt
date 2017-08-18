@@ -2,6 +2,7 @@ package clocklife.shenle.com
 
 import android.content.Context
 import android.os.Bundle
+import android.support.v7.widget.Toolbar
 import android.view.View
 import com.mob.mobapi.API
 import com.mob.mobapi.APICallback
@@ -14,6 +15,10 @@ import slmodule.shenle.com.BaseActivity
 import slmodule.shenle.com.utils.UIUtils
 
 class FindPasswordActivity : BaseActivity(){
+    override fun initToolBar(): Toolbar? {
+        return toolbar
+    }
+
     override fun getRootView(): Int {
         return R.layout.activity_find_password
     }

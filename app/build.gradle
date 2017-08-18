@@ -6,13 +6,14 @@ apply plugin: 'kotlin-android-extensions'
 def dbflow_version = "4.0.3"
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "clocklife.shenle.com"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -46,10 +47,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 repositories {
-//    mavenCentral()
+
+    //    mavenCentral()
     jcenter()
-    maven { url "https://jitpack.io" }
-    flatDir {
-        dirs 'libs' , '../MobAPI/libs' //第一个libs是主项目的libs,其他module的libs路径需要用逗号隔开../module名/libs
-    }
+    maven { url 'https://jitpack.io' }
 }

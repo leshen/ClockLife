@@ -2,11 +2,11 @@ package slmodule.shenle.com
 
 import android.app.Activity
 import android.app.ActivityManager
-import android.app.Application
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.os.Process
+import android.support.multidex.MultiDexApplication
 import com.mob.MobSDK
 
 import com.raizlabs.android.dbflow.config.FlowManager
@@ -17,12 +17,17 @@ import java.util.LinkedList
 import io.rong.imlib.RongIMClient
 import slmodule.shenle.com.utils.UIUtils
 import zyt.xunfeilib.XunFeiHelper
+import android.support.multidex.MultiDex
+
 
 //点播不需要
 
-open class BaseApplication : Application() {
+open class BaseApplication : MultiDexApplication() {
     var isDayOrNight = false//是否是夜间模式
-
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
     override fun onCreate() {
         application = this
         mainThread = Thread.currentThread()
@@ -214,4 +219,5 @@ open class BaseApplication : Application() {
             return null
         }
     }
+
 }

@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.Snackbar
+import android.support.v7.widget.Toolbar
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.SpannedString
@@ -21,10 +22,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.Toast
+import io.reactivex.Observable
+import slmodule.shenle.com.BaseActivity
 
 import slmodule.shenle.com.BaseApplication
 import slmodule.shenle.com.BaseHolder
 import slmodule.shenle.com.view.BadgeView
+import java.util.concurrent.TimeUnit
 
 
 object UIUtils {
@@ -435,6 +439,17 @@ object UIUtils {
                 unbindDrawables(view.getChildAt(i))
             }
             view.removeAllViews()
+        }
+    }
+
+    fun setToolBar(toolbar: Toolbar?, title: String): Toolbar? {
+        toolbar?.setTitle(title)
+        return toolbar
+    }
+
+    fun finishDelay(i: Long,activity: BaseActivity) {
+        Observable.timer(i, TimeUnit.SECONDS).compose(activity.bindToLifecycle()).subscribe {
+            activity.finish()
         }
     }
 }

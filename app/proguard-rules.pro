@@ -28,9 +28,9 @@
 # SMSSDK mob
 -dontwarn com.mob.**
 -keep class com.mob.**{*;}
-
--dontwarn cn.smssdk.**
--keep class cn.smssdk.**{*;}
+-keep class com.mob.**{*;}
+-keep class cn.sharesdk.**{*;}
+-kepp class cn.smssdk.**{*;}
 
 
 #融云 SDK 支持小米和 GCM 推送，SDK 内部帮用户做了部分集成， 所以在您没有集成这几个第三方 jar 包时， 会有一些告警，混淆时加入下面语句即可：
@@ -46,3 +46,12 @@
 
 #讯飞统计
 -keep class com.iflytek.sunflower.**{*;}
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.AppGlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
+# for DexGuard only
+-keepresourcexmlelements manifest/application/meta-data@value=GlideModule

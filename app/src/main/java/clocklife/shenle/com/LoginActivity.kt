@@ -1,13 +1,17 @@
 package clocklife.shenle.com
 
+import android.os.Build
 import android.os.Bundle
-import com.mob.mobapi.API
-import com.mob.mobapi.APICallback
-import com.mob.mobapi.MobAPI
-import com.mob.mobapi.apis.UserCenter
+import android.support.v7.widget.Toolbar
+import clocklife.shenle.com.base.data.BaseAppState
+import clocklife.shenle.com.db.bean.AppUserInfo
+import clocklife.shenle.com.db.bean.AppUserInfo_Table
+import com.mob.ums.OperationCallback
+import com.mob.ums.UMSSDK
+import com.mob.ums.User
 import kotlinx.android.synthetic.main.activity_login.*
-import org.json.JSONObject
 import slmodule.shenle.com.BaseActivity
+import slmodule.shenle.com.db.DBHelper
 import slmodule.shenle.com.utils.UIUtils
 import java.util.regex.Pattern
 
@@ -16,26 +20,78 @@ import java.util.regex.Pattern
  * 登录
  */
 class LoginActivity : BaseActivity() {
+    override fun initToolBar(): Toolbar? {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(UIUtils.getColor(R.color.bg_20))
+        }
+        return null
+    }
+
     override fun getRootView(): Int {
         return R.layout.activity_login
     }
 
+    override fun onTest() {
+        userName.editText?.setText("15810111946")
+        userPassword.editText?.setText("shen1le1")
+    }
     override fun initOnCreate(savedInstanceState: Bundle?) {
         userName.hint = UIUtils.getString(R.string.prompt_name)
         userPassword.hint = UIUtils.getString(R.string.prompt_password)
+        userPassword.isPasswordVisibilityToggleEnabled = true
+        var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java)
+        if(appUserInfo!=null){
+            userName.editText?.setText(appUserInfo.phone)
+            userPassword.editText?.setText(appUserInfo.password)
+        }
         login.setOnClickListener{
             if(checkTrue()){
-                val loginApi = MobAPI.getAPI(UserCenter.NAME)as UserCenter
-                loginApi.login(userName.editText?.text.toString().trim(),userPassword.editText?.text.toString().trim(), object : APICallback {
-                    override fun onSuccess(p0: API?, p1: Int, p2: MutableMap<String, Any>?) {
+//                val loginApi = MobAPI.getAPI(UserCenter.NAME)as UserCenter
+//                loginApi.login(userName.editText?.text.toString().trim(),userPassword.editText?.text.toString().trim(), object : APICallback {
+//                    override fun onSuccess(p0: API?, p1: Int, p2: MutableMap<String, Any>?) {
+//                        MainActivity.goHere()
+//                    }
+//
+//                    override fun onError(p0: API?, p1: Int, p2: Throwable?) {
+//                        val jsonObject = JSONObject(p2?.message)
+//                        UIUtils.showToastSafe(jsonObject.optString("msg"))
+//                    }
+//                })
+                dialog.show()
+                UMSSDK.loginWithPhoneNumber("86", userName.editText?.text.toString().trim(),userPassword.editText?.text.toString().trim(), object: OperationCallback<User>() {
+                    override fun onSuccess(user: User) {
+                        // 执行成功的操作
+                        dialog.dismiss()
+                        val where = AppUserInfo_Table.uid.eq(user.id.get())
+                        var appUserInfo = DBHelper.querySingleOrMake(AppUserInfo::class.java,where)
+                        appUserInfo.uid = user.id.get()
+                        appUserInfo.name = user.nickname.get()
+                        appUserInfo.phone = user.phone.get()
+                        appUserInfo.gender = user.gender.get().code()
+                        appUserInfo.photo = user.avatar.get().get(0)
+                        appUserInfo.hasLogin = true
+                        appUserInfo.sign = user.signature.get()
+                        appUserInfo.password = userPassword.editText?.text.toString()
+                        val token = user.getCustomField("token")
+                        if(token!=null&&token.value() is String){
+                            appUserInfo.token = token.value() as String
+                        }
+                        appUserInfo.update()
+                        BaseAppState.setData(appUserInfo)
                         MainActivity.goHere()
                     }
 
-                    override fun onError(p0: API?, p1: Int, p2: Throwable?) {
-                        val jsonObject = JSONObject(p2?.message)
-                        UIUtils.showToastSafe(jsonObject.optString("msg"))
+                    override fun  onCancel() {
+                        // 执行取消的操作
+                        dialog.dismiss()
                     }
-                })
+
+                    override fun onFailed(t:Throwable) {
+                        // 提示错误信息
+                        dialog.dismiss()
+                        UIUtils.showToastSafe(t.message)
+                    }
+                });
             }}
         bt_register.setOnClickListener{
             RegisterActivity.goHere()

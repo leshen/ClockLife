@@ -2,14 +2,18 @@ package slmodule.shenle.com
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import android.support.v7.widget.Toolbar
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.iflytek.sunflower.FlowerCollector
+import slmodule.shenle.com.data.Constants
+import slmodule.shenle.com.dialog.LoadingDialog
 
 
 /**
@@ -17,9 +21,14 @@ import com.iflytek.sunflower.FlowerCollector
  */
 abstract class BaseActivity : RxAppCompatActivity() {
     var is_init = false
+    lateinit var dialog: LoadingDialog
+    open fun onTest(){
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         BaseApplication.getInstance().addActivity(this)
+        dialog = LoadingDialog(this,R.style.LoadingDialog)
         is_init = getIntent().getBooleanExtra("is_init", false)
         var s: String? = null
         try {
@@ -30,8 +39,16 @@ abstract class BaseActivity : RxAppCompatActivity() {
             is_init = java.lang.Boolean.parseBoolean(s)
         }
         setContentView(getRootView())
+        val toolBar = initToolBar()
+        setSupportActionBar(toolBar)
+        toolBar?.setNavigationOnClickListener { onBack(it) }
         initOnCreate(savedInstanceState)
+        if (Constants.isTest){
+            onTest()
+        }
     }
+
+    abstract fun initToolBar():Toolbar?
 
     abstract fun getRootView(): Int
 

@@ -2,12 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 8
+    compileSdkVersion 25
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 8
+        minSdkVersion 19
+        targetSdkVersion 25
         versionCode rootProject.ext.mobApiVersionCode
         versionName rootProject.ext.mobApiVersionName
     }
@@ -27,9 +27,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile (name:'SMSSDK-3.0.0',ext:'aar')
+    //    compile(name: 'SMSSDK-3.0.0', ext: 'aar')
+    //    compile (name:'SMSSDKGUI-3.0.0',ext:'aar')
 }
 repositories {
     mavenCentral()

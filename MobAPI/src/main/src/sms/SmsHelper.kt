@@ -1,15 +1,13 @@
 package main.src.sms
 
+import android.content.Context
 import android.graphics.Color
 import android.os.CountDownTimer
-import android.widget.EditText
+import android.telephony.TelephonyManager
+import android.text.TextUtils
 import android.widget.TextView
 import cn.smssdk.SMSSDK
-import cn.smssdk.EventHandler
-import cn.smssdk.OnSendMessageHandler
-import com.mob.mobapi.MobAPI
-import com.mob.mobapi.R
-import org.json.JSONObject
+import cn.smssdk.utils.SMSLog
 
 
 /**
@@ -17,41 +15,7 @@ import org.json.JSONObject
  */
 class SmsHelper {
     companion object {
-        var eventHandler: EventHandler? = null
-        fun init() {
-            // 如果希望在读取通信录的时候提示用户，可以添加下面的代码，并且必须在其他代码调用之前，否则不起作用；如果没这个需求，可以不加这行代码
-            SMSSDK.setAskPermisionOnReadContact(true)
-        }
-
-        fun registSMS() {
-            // 创建EventHandler对象
-            eventHandler = object : EventHandler() {
-                override fun afterEvent(event: Int, result: Int, data: Any) {
-                    if (result === SMSSDK.RESULT_COMPLETE) {
-                        //回调完成
-                        if (event === SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                            //提交验证码成功
-                        } else if (event === SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                            //获取验证码成功
-
-                        } else if (event === SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {
-                            //返回支持发送验证码的国家列表
-                        }
-                    } else {
-                        (data as Throwable).printStackTrace()
-                    }
-                }
-            }
-            // 注册监听器
-            SMSSDK.registerEventHandler(eventHandler)
-        }
-
-        fun unregistSMS() {
-            // 注销监听器
-            SMSSDK.unregisterEventHandler(eventHandler)
-            eventHandler=null
-        }
-
+        var country_code = ""
         /**
          * 发送验证码
 
@@ -60,20 +24,37 @@ class SmsHelper {
          * @param_code
          */
         fun sendYZM(phone: String, tv_code: TextView) {
-            SMSSDK.getVerificationCode("中国",phone,object:OnSendMessageHandler{
-                override fun onSendMessage(p0: String?, p1: String?): Boolean {
-                    return true
-                }
-
-            })
+            country_code = "+${getCurrentCountry(tv_code.context)?.get(1)}"
+            SMSSDK.getVerificationCode(country_code,phone)
             /**
-             * 倒计时 60秒后可以重新发送验证码
+             * 倒计时 30秒后可以重新发送验证码
              */
-            val mc = MyCountTime((60 * 1000).toLong(), 1000, tv_code)
+            val mc = MyCountTime((30 * 1000).toLong(), 1000, tv_code)
             mc.start()
         }
-        fun onSubmit(phone: String, code:String){
-            SMSSDK.submitVerificationCode("中国",phone,code)
+        fun onSubmit(context:Context,phone: String, code:String){
+            if(country_code.isEmpty())
+                country_code = "+${getCurrentCountry(context)?.get(1)}"
+            SMSSDK.submitVerificationCode(country_code,phone,code)
+        }
+
+        fun getMCC(context : Context): String {
+            val tm = context.getSystemService("phone") as TelephonyManager
+            val networkOperator = tm.networkOperator
+            return if (!TextUtils.isEmpty(networkOperator)) networkOperator else tm.simOperator
+        }
+
+        fun getCurrentCountry(context : Context): Array<String> ?{
+            val mcc = this.getMCC(context)
+            var country: Array<String>? = null
+            if (!TextUtils.isEmpty(mcc)) {
+                country = SMSSDK.getCountryByMCC(mcc)
+            }
+            if (country == null) {
+                SMSLog.getInstance().d("no country found by MCC: " + mcc, *arrayOfNulls<Any>(0))
+                country = SMSSDK.getCountry("42")
+            }
+            return country
         }
     }
     /**
