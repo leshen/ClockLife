@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import clocklife.shenle.com.db.bean.AppUserInfo
 import clocklife.shenle.com.db.bean.AppUserInfo_Table
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.api.BasicCallback
 import com.mob.ums.OperationCallback
 import com.mob.ums.UMSSDK
 import com.mob.ums.User
 import kotlinx.android.synthetic.main.activity_setpassword.*
 import slmodule.shenle.com.BaseActivity
 import slmodule.shenle.com.db.DBHelper
+import slmodule.shenle.com.utils.RxBus
 import slmodule.shenle.com.utils.UIUtils
 import java.util.regex.Pattern
 
@@ -48,6 +51,7 @@ class SetPasswordActivity : BaseActivity() {
             if (userPassword1.editText?.text.toString().trim() != userPassword2.editText?.text.toString().trim()) {
                 userPassword2.error = "两次密码不一致"
             }
+
 //            var userCenter = MobAPI.getAPI(UserCenter.NAME) as UserCenter
 //            userCenter.register(phone, userPassword1.editText?.text.toString().trim(), "leshen_s@qq.com", object : APICallback {
 //                override fun onError(p0: API?, p1: Int, p2: Throwable?) {
@@ -82,6 +86,9 @@ class SetPasswordActivity : BaseActivity() {
                     UIUtils.showToastSafe(p0.message)
                     if (p0.message!!.contains("已经存在")){
                         LoginActivity.goHere()
+                        RxBus.get().post(RegisterSuccess())
+                        finish()
+                    }else if (p0.message!!.contains("验证码")){
                         finish()
                     }
                 }
@@ -93,12 +100,26 @@ class SetPasswordActivity : BaseActivity() {
                     appUserInfo.uid = user.id.get()
                     appUserInfo.name = user.nickname.get()
                     appUserInfo.phone = user.phone.get()
-                    appUserInfo.gender = user.gender.get().code()
+                    if (user.gender.get()==null){
+                        appUserInfo.gender = 0
+                    }else{
+                        appUserInfo.gender = user.gender.get().code()
+                    }
                     appUserInfo.photo = user.avatar.get().get(0)
                     appUserInfo.hasLogin = true
+                    appUserInfo.password = userPassword1.editText?.text.toString().trim()
                     appUserInfo.update()
-                    MainActivity.goHere()
-                    finish()
+                    JMessageClient.register("sl"+user.nickname.get(), userPassword1.editText?.text.toString().trim(), object :BasicCallback(){
+                        override fun gotResult(code: Int, p1: String?) {
+                            if (code==0){
+                                //注册成功
+                            }
+                            UIUtils.showToastSafe("code=${code}"+p1)
+                            MainActivity.goHere()
+                            RxBus.get().post(RegisterSuccess())
+                            finish()
+                        }
+                    })
                 }
             })
         }
@@ -120,4 +141,5 @@ class SetPasswordActivity : BaseActivity() {
 //        return false
 //    }
 }
+class RegisterSuccess
 

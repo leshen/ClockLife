@@ -17,7 +17,13 @@ import slmodule.shenle.com.BaseFragment
 import slmodule.shenle.com.BaseMainActivity
 import slmodule.shenle.com.db.DBHelper
 import slmodule.shenle.com.utils.UIUtils
-
+import android.content.Intent
+import android.os.Handler
+import android.view.KeyEvent
+import android.widget.Toast
+import android.view.KeyEvent.KEYCODE_BACK
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.api.BasicCallback
 
 
 class MainActivity : BaseMainActivity() {
@@ -79,6 +85,7 @@ class MainActivity : BaseMainActivity() {
                     appUserInfo?.hasLogin = false
                     appUserInfo.update()
                     BaseAppState.clear()
+                    JMessageClient.logout()
                     InitActivity.goHere()
                     UIUtils.finishDelay(2,this@MainActivity)
                 }
@@ -93,6 +100,25 @@ class MainActivity : BaseMainActivity() {
                 }
             })
         }
+    }
+
+//    private var mIsExit: Boolean = false
+    /**
+     * 双击返回键退出
+     */
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(false);
+//            if (mIsExit) {
+//                this.finish()
+//            } else {
+//                Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show()
+//                mIsExit = true
+//                Handler().postDelayed({ mIsExit = false }, 2000)
+//            }
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }
 

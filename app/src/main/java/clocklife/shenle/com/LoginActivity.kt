@@ -6,6 +6,8 @@ import android.support.v7.widget.Toolbar
 import clocklife.shenle.com.base.data.BaseAppState
 import clocklife.shenle.com.db.bean.AppUserInfo
 import clocklife.shenle.com.db.bean.AppUserInfo_Table
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.api.BasicCallback
 import com.mob.ums.OperationCallback
 import com.mob.ums.UMSSDK
 import com.mob.ums.User
@@ -63,11 +65,15 @@ class LoginActivity : BaseActivity() {
                         // 执行成功的操作
                         dialog.dismiss()
                         val where = AppUserInfo_Table.uid.eq(user.id.get())
-                        var appUserInfo = DBHelper.querySingleOrMake(AppUserInfo::class.java,where)
+                        val appUserInfo = DBHelper.querySingleOrMake(AppUserInfo::class.java,where)
                         appUserInfo.uid = user.id.get()
                         appUserInfo.name = user.nickname.get()
                         appUserInfo.phone = user.phone.get()
-                        appUserInfo.gender = user.gender.get().code()
+                        if (user.gender.get()==null){
+                            appUserInfo.gender = 0
+                        }else{
+                            appUserInfo.gender = user.gender.get().code()
+                        }
                         appUserInfo.photo = user.avatar.get().get(0)
                         appUserInfo.hasLogin = true
                         appUserInfo.sign = user.signature.get()
@@ -78,7 +84,41 @@ class LoginActivity : BaseActivity() {
                         }
                         appUserInfo.update()
                         BaseAppState.setData(appUserInfo)
-                        MainActivity.goHere()
+                        JMessageClient.login("sl"+user.phone.get(), userPassword.editText?.text.toString().trim(), object : BasicCallback(){
+                            override fun gotResult(code: Int, p1: String?) {
+                                if (code==0){
+                                    //登录成功
+                                    MainActivity.goHere()
+                                    UIUtils.finishDelay(2,this@LoginActivity)
+                                }else if(code==871303){
+                                    JMessageClient.register("sl"+appUserInfo.name, appUserInfo.password, object :BasicCallback(){
+                                        override fun gotResult(code: Int, p1: String?) {
+                                            if (code==0){
+                                                //注册成功
+                                                JMessageClient.login("sl"+appUserInfo.name, appUserInfo.password, object : BasicCallback() {
+                                                    override fun gotResult(code: Int, p1: String?) {
+                                                        if (code == 0) {
+                                                            //登录成功
+                                                        }
+                                                        MainActivity.goHere()
+                                                        UIUtils.finishDelay(2, this@LoginActivity)
+                                                        UIUtils.showToastSafe("code=${code}"+p1)
+                                                    }
+                                                })
+                                            }else{
+                                                MainActivity.goHere()
+                                                UIUtils.finishDelay(2, this@LoginActivity)
+                                                UIUtils.showToastSafe("code=${code}"+p1)
+                                            }
+
+                                        }})
+                                }else{
+                                    MainActivity.goHere()
+                                    UIUtils.finishDelay(2,this@LoginActivity)
+                                }
+                                UIUtils.showToastSafe("code=${code}"+p1)
+                            }
+                        })
                     }
 
                     override fun  onCancel() {

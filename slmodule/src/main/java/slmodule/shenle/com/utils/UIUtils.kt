@@ -2,6 +2,7 @@ package slmodule.shenle.com.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.content.res.Resources
@@ -11,18 +12,19 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.Toolbar
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.SpannedString
-import android.text.style.AbsoluteSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.jakewharton.rxbinding2.view.RxView
+import com.trello.rxlifecycle2.android.ActivityEvent
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import slmodule.shenle.com.BaseActivity
 
 import slmodule.shenle.com.BaseApplication
@@ -448,8 +450,49 @@ object UIUtils {
     }
 
     fun finishDelay(i: Long,activity: BaseActivity) {
-        Observable.timer(i, TimeUnit.SECONDS).compose(activity.bindToLifecycle()).subscribe {
+//        Observable.timer(i, TimeUnit.SECONDS).compose(activity.bindToLifecycle()).subscribe {
+        Observable.timer(i, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())  //指定 subscribe() 发生在 IO 线程
+                .observeOn( AndroidSchedulers.mainThread() )  //指定 Subscriber 的回调发生在主线程
+                .compose(activity.bindUntilEvent<Long>(ActivityEvent.DESTROY ))
+//                .compose(activity.bindToLifecycle())
+                .subscribe {
             activity.finish()
+//            UIUtils.showToastSafe("已经关闭了"+activity.toString())
         }
+    }
+
+    fun <T> register(clazz: Class<T>, event: () -> Unit):Observable<T> {
+        val observable = RxBus.get().register("sl", clazz)
+        observable.subscribe { event }
+        return observable
+    }
+    fun <T> unregister(observable:Observable<T>) {
+        RxBus.get().unregister("sl",observable)
+    }
+
+    /**
+     * //两秒钟之内只取一个点击事件，防抖操作
+     */
+    fun onClick(button: Button, event: (view :View) -> Unit) {
+        RxView.clicks( button )
+                .throttleFirst( 2 , TimeUnit.SECONDS )
+                .compose((getActivityFromView(button)  as BaseActivity).bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe{event}
+    }
+    /**
+     * try get host activity from view.
+     * views hosted on floating window like dialog and toast will sure return null.
+     * @return host activity; or null if not available
+     */
+    fun  getActivityFromView(view:View):Activity? {
+        var context = view.getContext()
+        while (context is ContextWrapper) {
+            if (context is Activity) {
+                return context
+            }
+            context = context.getBaseContext()
+        }
+        return null
     }
 }

@@ -6,27 +6,66 @@ import android.view.View
 import android.view.ViewGroup
 import clocklife.shenle.com.R
 import slmodule.shenle.com.BaseFragment
+import com.asha.ChromeLikeSwipeLayout
+import com.asha.ChromeLikeSwipeLayout.dp2px
+import kotlinx.android.synthetic.main.fragment_one.view.*
+import slmodule.shenle.com.utils.UIUtils
+
 
 /**
  * Created by shenle on 2017/8/1.
  */
-class OneFragment :BaseFragment() {
+class OneFragment : BaseFragment(), View.OnClickListener {
+    override fun onClick(v: View) {
+        when (v.id){
+            R.id.bt_jl->{}
+            R.id.bt_tx->{}
+            R.id.bt_rj->{}
+            R.id.bt_gx->{
+
+            }
+            R.id.bt_tbda->{}
+            R.id.bt_jqbm->{}
+        }
+    }
+
     override fun refresh() {
 
     }
 
     companion object {
-            fun getInstance(): OneFragment {
-                return Holder.instance
-            }
+        fun getInstance(): OneFragment {
+            return Holder.instance
         }
-        private object Holder {
-            val instance = OneFragment()
-        }
+    }
+
+    private object Holder {
+        val instance = OneFragment()
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater?.inflate(R.layout.fragment_one, container, false)
+        ChromeLikeSwipeLayout.makeConfig()
+                .addIcon(R.drawable.selector_icon_add)
+                .addIcon(R.drawable.selector_icon_refresh)
+                .addIcon(R.drawable.selector_icon_close)
+                .backgroundColor(R.color.bg_5)
+//                .maxHeight(dp2px(40f))
+                .radius(dp2px(35f))
+                .gap(dp2px(5f))
+                .circleColor(0xFF11CCFF.toInt())
+                .gummyDuration(1000)
+                .rippleDuration(1000)
+                .collapseDuration(1000)
+                .listenItemSelected({ UIUtils.showToastSafe("onItemSelected:" + it)})
+                .setTo(view?.chrome_like_swipe_layout)
+        view?.bt_jl?.setOnClickListener(this)
+        view?.bt_tx?.setOnClickListener(this)
+        view?.bt_rj?.setOnClickListener(this)
+        view?.bt_gx?.setOnClickListener(this)
+        view?.bt_tbda?.setOnClickListener(this)
+        view?.bt_jqbm?.setOnClickListener(this)
         return view
     }
 }

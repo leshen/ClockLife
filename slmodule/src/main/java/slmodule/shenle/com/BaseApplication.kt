@@ -14,13 +14,13 @@ import com.raizlabs.android.dbflow.config.FlowManager
 import java.util.ArrayList
 import java.util.LinkedList
 
-import io.rong.imlib.RongIMClient
 import slmodule.shenle.com.utils.UIUtils
 import zyt.xunfeilib.XunFeiHelper
 import android.support.multidex.MultiDex
+import cn.jpush.im.android.api.JMessageClient
 
 
-//点播不需要
+
 
 open class BaseApplication : MultiDexApplication() {
     var isDayOrNight = false//是否是夜间模式
@@ -37,7 +37,7 @@ open class BaseApplication : MultiDexApplication() {
         super.onCreate()
         initDB()
         initTongJi()
-        initRongYun()
+        initLib()
         initXunFei()
         initMB()
     }
@@ -71,10 +71,11 @@ open class BaseApplication : MultiDexApplication() {
     }
 
     /**
-     * 融云lib
+     * 及时通讯lib
      */
-    private fun initRongYun() {
-        RongIMClient.init(this)
+    open fun initLib() {
+        JMessageClient.init(applicationContext,true)
+        JMessageClient.setDebugMode(true)
     }
 
     fun addActivity(activity: Activity) {
@@ -92,9 +93,6 @@ open class BaseApplication : MultiDexApplication() {
      * 销毁的其他
      */
     private fun onDestory() {
-        // 融云
-        if (RongIMClient.getInstance() != null)
-            RongIMClient.getInstance().disconnect()
         Process.killProcess(Process.myPid())
     }
 

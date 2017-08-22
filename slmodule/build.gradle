@@ -13,6 +13,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -25,6 +26,7 @@ android {
     productFlavors {
     }
 }
+
 
 dependencies {
     apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
@@ -43,8 +45,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
+//    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-vector-drawable:25.3.1'
@@ -52,7 +53,6 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.aurelhubert:ahbottomnavigation:2.0.6'
     compile project(':XunFeiLib')
-    compile project(':IMLib')
     compile project(':CMSSDKGUI')
     compile 'com.android.support:multidex:1.0.1'
     //    compile 'com.github.bumptech.glide:glide:4.0.0'
@@ -62,6 +62,11 @@ dependencies {
     // If you want to use the GPU Filters
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile 'com.github.ashqal:ChromeLikeSwipeLayout:0.4'
+    compile 'cn.jiguang.sdk:jmessage:2.2.1'
+    // 此处以JMessage 2.2.1 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.6'
+    // 此处以JCore 1.1.6 版本为例。
 }
 repositories {
 

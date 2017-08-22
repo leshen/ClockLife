@@ -1,17 +1,15 @@
 package clocklife.shenle.com
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
-import android.view.View
-import com.mob.mobapi.API
-import com.mob.mobapi.APICallback
-import com.mob.mobapi.MobAPI
-import com.mob.mobapi.apis.UserCenter
+import clocklife.shenle.com.db.bean.AppUserInfo
+import clocklife.shenle.com.db.bean.AppUserInfo_Table
+import com.mob.ums.OperationCallback
+import com.mob.ums.UMSSDK
 import kotlinx.android.synthetic.main.activity_find_password.*
-import kotlinx.android.synthetic.main.activity_login.*
-import org.json.JSONObject
 import slmodule.shenle.com.BaseActivity
+import slmodule.shenle.com.db.DBHelper
+import slmodule.shenle.com.utils.RxBus
 import slmodule.shenle.com.utils.UIUtils
 
 class FindPasswordActivity : BaseActivity(){
@@ -24,29 +22,49 @@ class FindPasswordActivity : BaseActivity(){
     }
 
     override fun initOnCreate(savedInstanceState: Bundle?) {
-        userPassword1.hint = UIUtils.getString(R.string.set_password)
+        userPassword1.hint = UIUtils.getString(R.string.set_new_password)
         userPassword2.hint = UIUtils.getString(R.string.set_password_again)
-        login.setOnClickListener {
-            if (checkTrue()) {
-                val loginApi = MobAPI.getAPI(UserCenter.NAME) as UserCenter
-                loginApi.login(userName.editText?.text.toString().trim(), userPassword.editText?.text.toString().trim(), object : APICallback {
-                    override fun onSuccess(p0: API?, p1: Int, p2: MutableMap<String, Any>?) {
-                        MainActivity.goHere()
-                    }
-
-                    override fun onError(p0: API?, p1: Int, p2: Throwable?) {
-                        val jsonObject = JSONObject(p2?.message)
-                        UIUtils.showToastSafe(jsonObject.optString("message"))
-                    }
-                })
+        UIUtils.onClick(bt_submit,{
+            val phone = et_phone.text.toString().trim()
+            val code = et_code.text.toString().trim()
+            if (UIUtils.isEmpty(code)) {
+                UIUtils.showSnackBar(it, "验证码不能为空")
+                return@onClick
             }
-        }
-    }
+            if (UIUtils.isEmpty(phone)) {
+                UIUtils.showSnackBar(it, "手机号不能为空")
+                return@onClick
+            }
+            dialog.show()
+            UMSSDK.resetPasswordWithPhoneNumber("86",phone,code,userPassword1.editText?.text.toString().trim(),object: OperationCallback<Void>() {
+                override fun onCancel() {
+                    dialog.dismiss()
+                }
 
-    private fun  checkTrue(): Boolean {
-        return true
-    }
+                override fun onFailed(p0: Throwable) {
+                    dialog.dismiss()
+                    UIUtils.showToastSafe(p0.message)
+                    if (p0.message!!.contains("已经存在")){
+                        LoginActivity.goHere()
+                        RxBus.get().post(RegisterSuccess())
+                        finish()
+                    }else if (p0.message!!.contains("验证码")){
+                        finish()
+                    }
+                }
 
+                override fun onSuccess(p0: Void?) {
+                    dialog.dismiss()
+                    val user = DBHelper.querySingleOrMake(AppUserInfo::class.java, AppUserInfo_Table.phone.eq(phone))
+                    user.phone = phone
+                    user.password = userPassword1.editText?.text.toString().trim()
+                    user.update()
+                    LoginActivity.goHere()
+                    finish()
+                }
+            })
+        })
+    }
 
     companion object {
         @JvmStatic fun goHere() {
@@ -54,62 +72,4 @@ class FindPasswordActivity : BaseActivity(){
         }
     }
 
-
-//    override fun new_initView() {
-//        setContentView(R.layout.activity_change_password)
-//        tv_code.setOnClickListener {
-//            if(UIUtils.isEmpty(mobile)) {
-//                mobile = et_phone.getText().toString().trim()
-//            }else{
-//                val trim = et_phone.getText().toString().trim()
-//                if(!trim.contains("*")){
-//                    mobile = trim
-//                }
-//            }
-//            MyZYT.setYZM(mobile,tv_code) }
-//    }
-//
-//    private var isBackLogin: Boolean? = false
-//
-//    override fun new_init(baseBundle: Bundle?) {
-//        isBackLogin = baseBundle?.getBoolean("isBackLogin")
-//        getHttp(Constants.PHONEAUTH_GETPHONE,null,"phone",this)
-//    }
-//    private var pwd2: String? = null
-//    var mobile = ""
-//    fun onSubmit(view: View) {
-//        val pwd1 = et_password1.getText().toString().trim()
-//        pwd2 = et_password2.getText().toString().trim()
-//        var code = et_code.getText().toString().trim()
-//        if(UIUtils.isEmpty(mobile)) {
-//            mobile = et_phone.getText().toString().trim()
-//        }else{
-//            val trim = et_phone.getText().toString().trim()
-//            if(!trim.contains("*")){
-//                mobile = trim
-//            }
-//        }
-//        if (pwd1.length < 8) {
-//            UIUtils.showToastSafe(R.string.str_set_password_notice)
-//            return
-//        }
-//        if (pwd1 != pwd2) {
-//            UIUtils.showToastSafe("两次密码不一致")
-//            return
-//        }
-//        if (mobile.isEmpty()){
-//            UIUtils.showToastSafe("手机号不能为空")
-//            return
-//        }
-//        if (code.isEmpty()){
-//            UIUtils.showToastSafe("验证码不能为空")
-//            return
-//        }
-//        val params = RequestParams()
-//        params.put("newpasswd", pwd1)
-//        params.put("code", code)
-//        params.put("mobile", mobile)
-//        bt_submit.isEnabled = false
-//        postHttp(Constants.SET_NEW_PASSWORD, params,"submit", this)
-//    }
 }

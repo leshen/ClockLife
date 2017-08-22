@@ -24,4 +24,6 @@
     <string name="btn_get_code">发送验证码</string>
     <string name="set_password">设置密码:必须是以字母开头,8位以上的字母和数字组合</string>
     <string name="set_password_again">重复密码</string>
+    <string name="set_new_password">设置新密码</string>
+    <string name="czmm">重置密码</string>
 </resources>

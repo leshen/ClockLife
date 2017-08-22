@@ -33,17 +33,12 @@ class InitActivity : BaseActivity() {
                 if (MyUtils.isLogin()) {
                     MainActivity.goHere()
                 }
-//            CMSGUI.showNewsListPageWithUMSSDKUser(com.mob.ums.gui.themes.defaultt.DefaultTheme::class.java)
-//            UMSGUI.showLogin(object : OperationCallback<AppUserInfo>() {
-//
-//            })
-                UIUtils.finishDelay(2, this)
+                UIUtils.finishDelay(1, this)
             }
         } else {
             Observable.timer(2, TimeUnit.SECONDS).compose(this.bindToLifecycle()).subscribe {
-                if (MyUtils.isLogin()) {
-                    LoginActivity.goHere()
-                }
+                MyUtils.isLogin()
+                UIUtils.finishDelay(1, this)
             }
         }
     }

@@ -5,6 +5,7 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import cn.smssdk.EventHandler
 import cn.smssdk.SMSSDK
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_register.*
 import main.src.sms.SmsHelper
 import slmodule.shenle.com.BaseActivity
@@ -17,8 +18,13 @@ class RegisterActivity : BaseActivity() {
         return toolbar
     }
 
+    private lateinit var observable1: Observable<RegisterSuccess>
+
     override fun getRootView(): Int {
-        SMSSDK.setAskPermisionOnReadContact(true)
+        observable1 = UIUtils.register(RegisterSuccess::class.java, {
+            finish()
+        })
+//        SMSSDK.setAskPermisionOnReadContact(true)
         return R.layout.activity_register
     }
 
@@ -47,7 +53,7 @@ class RegisterActivity : BaseActivity() {
                             UIUtils.showToastSafe("验证码已发送,请注意查收")
                         }
                         SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE -> {//提交验证码成功
-//                            SetPasswordActivity.goHere(phone)
+//                            SetPasswordActivity.goHere(phone,code)
 //                            finish()
                         }
                         SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES -> {//返回支持发送验证码的国家列表
@@ -65,6 +71,7 @@ class RegisterActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        UIUtils.unregister(observable1)
         // 注销监听器
         SMSSDK.unregisterEventHandler(eventHandler)
     }
@@ -89,10 +96,11 @@ class RegisterActivity : BaseActivity() {
     }
 
     private var phone: String = ""
+    private var code: String = ""
 
     fun onSubmit(view: View) {
         phone = et_phone.text.toString().trim()
-        var code = et_code.text.toString().trim()
+        code = et_code.text.toString().trim()
         if (UIUtils.isEmpty(code)) {
             UIUtils.showSnackBar(view, "验证码不能为空")
             return
@@ -102,7 +110,6 @@ class RegisterActivity : BaseActivity() {
             return
         }
         SetPasswordActivity.goHere(phone,code)
-//        finish()
 //        SmsHelper.onSubmit(view.context, phone, code)
     }
 }
