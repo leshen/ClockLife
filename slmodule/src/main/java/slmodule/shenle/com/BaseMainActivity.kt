@@ -20,7 +20,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_base_main.*
-import kotlinx.android.synthetic.main.app_bar_base_main.*
+import kotlinx.android.synthetic.main.base_toolbar.*
 import kotlinx.android.synthetic.main.content_base_main.*
 
 
@@ -28,7 +28,9 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
     override fun initToolBar(): Toolbar? {
         return toolbar
     }
-
+    override fun supportSlideBack(): Boolean {
+        return false
+    }
     override fun getRootView(): Int{
         val enabledTranslucentNavigation = getSharedPreferences("shared", Context.MODE_PRIVATE)
                 .getBoolean("translucentNavigation", false)

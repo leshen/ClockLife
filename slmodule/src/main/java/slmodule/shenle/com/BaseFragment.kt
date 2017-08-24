@@ -15,11 +15,15 @@ import slmodule.shenle.com.utils.UIUtils
  * Created by shenle on 2017/7/31.
  */
 abstract class BaseFragment : RxFragment() {
-    fun getTitle(): CharSequence = "标题"
+    abstract fun getTitle(): CharSequence
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        super.onCreateView(inflater, container, savedInstanceState)
+        val view = inflater?.inflate(getRootView(), container, false)
+        initOnCreateView(view,savedInstanceState)
+        return view
     }
-
+    abstract fun getRootView(): Int
+    abstract fun initOnCreateView(view:View?,savedInstanceState: Bundle?)
     abstract fun refresh()
     var isHid = false
     /**

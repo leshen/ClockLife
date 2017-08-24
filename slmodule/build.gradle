@@ -67,6 +67,7 @@ dependencies {
     // 此处以JMessage 2.2.1 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.6'
     // 此处以JCore 1.1.6 版本为例。
+    compile 'com.aitangba:swipeback:1.0.1'//滑动返回
 }
 repositories {
 

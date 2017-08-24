@@ -90,12 +90,12 @@ class LoginActivity : BaseActivity() {
                                     //登录成功
                                     MainActivity.goHere()
                                     UIUtils.finishDelay(2,this@LoginActivity)
-                                }else if(code==871303){
-                                    JMessageClient.register("sl"+appUserInfo.name, appUserInfo.password, object :BasicCallback(){
+                                }else if(code==801003){
+                                    JMessageClient.register("sl"+user.phone.get(), userPassword.editText?.text.toString().trim(), object :BasicCallback(){
                                         override fun gotResult(code: Int, p1: String?) {
                                             if (code==0){
                                                 //注册成功
-                                                JMessageClient.login("sl"+appUserInfo.name, appUserInfo.password, object : BasicCallback() {
+                                                JMessageClient.login("sl"+user.phone.get(), userPassword.editText?.text.toString().trim(), object : BasicCallback() {
                                                     override fun gotResult(code: Int, p1: String?) {
                                                         if (code == 0) {
                                                             //登录成功

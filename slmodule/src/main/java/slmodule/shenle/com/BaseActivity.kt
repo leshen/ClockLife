@@ -1,8 +1,8 @@
 package slmodule.shenle.com
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import android.support.v7.widget.Toolbar
@@ -10,16 +10,17 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.iflytek.sunflower.FlowerCollector
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import slmodule.shenle.com.data.Constants
 import slmodule.shenle.com.dialog.LoadingDialog
+import slmodule.shenle.com.utils.SwipeBackHelper
 
 
 /**
  * Created by shenle on 2017/7/31.
  */
-abstract class BaseActivity : RxAppCompatActivity() {
+abstract class BaseActivity : RxAppCompatActivity(), SwipeBackHelper.SlideBackManager{
     var is_init = false
     lateinit var dialog: LoadingDialog
     open fun onTest(){
@@ -27,7 +28,6 @@ abstract class BaseActivity : RxAppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        BaseApplication.getInstance().addActivity(this)
         dialog = LoadingDialog(this,R.style.LoadingDialog)
         is_init = getIntent().getBooleanExtra("is_init", false)
         var s: String? = null
@@ -66,7 +66,10 @@ abstract class BaseActivity : RxAppCompatActivity() {
                 HideSoftInput(view.windowToken)
             }
         }
-        return super.dispatchTouchEvent(ev)
+        if (mSwipeBackHelper == null) {
+            mSwipeBackHelper = SwipeBackHelper(this)
+        }
+        return mSwipeBackHelper!!.processTouchEvent(ev) || super.dispatchTouchEvent(ev)
     }
 
     // 判定是否需要隐藏
@@ -107,7 +110,6 @@ abstract class BaseActivity : RxAppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        BaseApplication.foregroundActivity = this
         FlowerCollector.onResume(this)
     }
 
@@ -117,7 +119,29 @@ abstract class BaseActivity : RxAppCompatActivity() {
     }
 
     override fun onDestroy() {
-        BaseApplication.getInstance().removeActivity(this)
         super.onDestroy()
+    }
+    private val TAG = "SwipeBackActivity"
+
+    private var mSwipeBackHelper: SwipeBackHelper? = null
+
+    override fun getSlideActivity(): Activity {
+        return this
+    }
+
+    override fun supportSlideBack(): Boolean {
+        return true
+    }
+
+    override fun canBeSlideBack(): Boolean {
+        return true
+    }
+
+    override fun finish() {
+        if (mSwipeBackHelper != null) {
+            mSwipeBackHelper!!.finishSwipeImmediately()
+            mSwipeBackHelper = null
+        }
+        super.finish()
     }
 }

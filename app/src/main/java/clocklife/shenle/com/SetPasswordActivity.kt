@@ -10,6 +10,7 @@ import com.mob.ums.OperationCallback
 import com.mob.ums.UMSSDK
 import com.mob.ums.User
 import kotlinx.android.synthetic.main.activity_setpassword.*
+import kotlinx.android.synthetic.main.base_toolbar.*
 import slmodule.shenle.com.BaseActivity
 import slmodule.shenle.com.db.DBHelper
 import slmodule.shenle.com.utils.RxBus
@@ -19,6 +20,7 @@ import java.util.regex.Pattern
 
 class SetPasswordActivity : BaseActivity() {
     override fun initToolBar(): Toolbar? {
+        toolbar.setTitle("设置密码")
         return toolbar
     }
 
@@ -31,7 +33,6 @@ class SetPasswordActivity : BaseActivity() {
         val code = intent?.getStringExtra("code")
         userPassword1.hint = UIUtils.getString(R.string.set_password)
         userPassword2.hint = UIUtils.getString(R.string.set_password_again)
-        toolbar.setNavigationOnClickListener { onBack(it) }
         bt_register.setOnClickListener {
             //注册
             if (userPassword1.editText?.text.toString().trim().length == 0) {

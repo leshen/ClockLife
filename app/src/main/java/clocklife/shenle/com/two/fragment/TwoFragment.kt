@@ -11,6 +11,9 @@ import slmodule.shenle.com.BaseFragment
  * Created by shenle on 2017/8/1.
  */
 class TwoFragment :BaseFragment() {
+    override fun getTitle(): CharSequence {
+        return "TwoFragment"
+    }
     override fun refresh() {
 
     }
@@ -24,9 +27,10 @@ class TwoFragment :BaseFragment() {
             val instance = TwoFragment()
         }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater?.inflate(R.layout.fragment_two, container, false)
-        return view
+    override fun getRootView(): Int {
+        return R.layout.fragment_two
+    }
+
+    override fun initOnCreateView(view: View?, savedInstanceState: Bundle?) {
     }
 }

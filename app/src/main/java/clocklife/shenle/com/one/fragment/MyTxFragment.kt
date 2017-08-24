@@ -1,37 +1,31 @@
 package clocklife.shenle.com.one.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import clocklife.shenle.com.R
 import slmodule.shenle.com.BaseFragment
 
 /**
- * Created by shenle on 2017/8/1.
+ * 我的提醒
+ * Created by shenle on 2017/8/23.
  */
-class ThreeFragment : BaseFragment() {
+class MyTxFragment : BaseFragment(){
     override fun getTitle(): CharSequence {
-        return "ThreeFragment"
+        return "我的提醒"
     }
     override fun getRootView(): Int {
-        return R.layout.fragment_three
+        return R.layout.fragment_my_tx
     }
 
     override fun initOnCreateView(view: View?, savedInstanceState: Bundle?) {
+
     }
 
     override fun refresh() {
-
     }
-
     companion object {
-        fun getInstance(): ThreeFragment {
-            return Holder.instance
+        fun getInstance(): MyTxFragment {
+            return MyTxFragment()
         }
-    }
-
-    private object Holder {
-        val instance = ThreeFragment()
     }
 }

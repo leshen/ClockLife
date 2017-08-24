@@ -18,29 +18,30 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_PROFILE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <!-- Push service  运行需要的权限  -->
+    <!-- Push service  运行需要的权限 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
-    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
     <!-- 蓝牙分享所需的权限 -->
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <permission
         android:name="clocklife.shenle.com.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature"/>
 
     <!-- Required -->
-    <uses-permission android:name="clocklife.shenle.com.permission.JPUSH_MESSAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="clocklife.shenle.com.permission.JPUSH_MESSAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -55,178 +56,182 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
         <!-- mob -->
         <meta-data
             android:name="Mob-AppKey"
             android:value="@string/MobAppKey"/>
-        <meta-data android:name="Mob-AppSecret" android:value="@string/MobAppSecret"/>
+        <meta-data
+            android:name="Mob-AppSecret"
+            android:value="@string/MobAppSecret"/>
         <!-- ShareSDK的activity -->
         <activity
             android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
-
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
-                <data android:scheme="tencent100371282" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="tencent100371282"/>
+
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
 
             <!-- 调用新浪原生SDK，需要注册的回调activity -->
             <intent-filter>
-                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
 
-            <!--集成line客户端登录授权，需要添如下格式的过滤器-->
+            <!-- 集成line客户端登录授权，需要添如下格式的过滤器 -->
             <intent-filter>
-                <data android:scheme="line.1477692153" />
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+                <data android:scheme="line.1477692153"/>
 
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
         </activity>
-        <!--微信分享回调 -->
+        <!-- 微信分享回调 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <!-- 支付宝分享回调 -->
         <activity
             android:name=".apshare.ShareEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"/>
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <!-- mob用户系统 -->
 
+         <!--极光im-->
+         <!-- Required SDK 核心功能-->
+         <!-- 可配置android:process参数将PushService放在其他进程中 -->
+         <service
+         android:name="cn.jpush.android.service.PushService"
+         android:enabled="true"
+         android:exported="false">
+         <intent-filter>
+         <action android:name="cn.jpush.android.intent.REGISTER" />
+         <action android:name="cn.jpush.android.intent.REPORT" />
+         <action android:name="cn.jpush.android.intent.PushService" />
+         <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+         </intent-filter>
+         </service>
 
-        <!--极光im-->
-        <!-- Required SDK 核心功能-->
-        <!-- 可配置android:process参数将PushService放在其他进程中 -->
-        <service
-            android:name="cn.jpush.android.service.PushService"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTER" />
-                <action android:name="cn.jpush.android.intent.REPORT" />
-                <action android:name="cn.jpush.android.intent.PushService" />
-                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
-            </intent-filter>
-        </service>
+         <!-- Required SDK核心功能-->
+         <receiver
+         android:name="cn.jpush.android.service.PushReceiver"
+         android:enabled="true"
+         android:exported="false">
+         <intent-filter android:priority="1000">
+         <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+         <category android:name="clocklife.shenle.com" />
+         </intent-filter>
+         <intent-filter>
+         <action android:name="android.intent.action.USER_PRESENT" />
+         <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+         </intent-filter>
+         <!-- Optional -->
+         <intent-filter>
+         <action android:name="android.intent.action.PACKAGE_ADDED" />
+         <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
-        <!-- Required SDK核心功能-->
-        <receiver
-            android:name="cn.jpush.android.service.PushReceiver"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter android:priority="1000">
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
-                <category android:name="clocklife.shenle.com" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.USER_PRESENT" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-            <!-- Optional -->
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+         <data android:scheme="package" />
+         </intent-filter>
+         </receiver>
 
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
+         <!-- Required SDK核心功能-->
+         <receiver
+         android:name="cn.jpush.android.service.AlarmReceiver"
+         android:exported="false" />
 
-        <!-- Required SDK核心功能-->
-        <receiver
-            android:name="cn.jpush.android.service.AlarmReceiver"
-            android:exported="false" />
+         <!-- Required JMessage SDK核心功能-->
+         <receiver
+         android:name="cn.jpush.im.android.helpers.IMReceiver"
+         android:enabled="true"
+         android:exported="false">
+         <intent-filter android:priority="1000">
+         <action android:name="cn.jpush.im.android.action.IM_RESPONSE" />
+         <action android:name="cn.jpush.im.android.action.NOTIFICATION_CLICK_PROXY" />
 
-        <!-- Required JMessage SDK核心功能-->
-        <receiver
-            android:name="cn.jpush.im.android.helpers.IMReceiver"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter android:priority="1000">
-                <action android:name="cn.jpush.im.android.action.IM_RESPONSE" />
-                <action android:name="cn.jpush.im.android.action.NOTIFICATION_CLICK_PROXY" />
+         <category android:name="clocklife.shenle.com" />
+         </intent-filter>
+         </receiver>
 
-                <category android:name="clocklife.shenle.com" />
-            </intent-filter>
-        </receiver>
+         <!-- Required. For publish channel feature -->
+         <!-- JPUSH_CHANNEL 是为了方便开发者统计APK分发渠道。-->
+         <!-- 例如: -->
+         <!-- 发到 Google Play 的APK可以设置为 google-play; -->
+         <!-- 发到其他市场的 APK 可以设置为 xxx-market。 -->
+         <!-- 目前这个渠道统计功能的报表还未开放。-->
+         <meta-data
+         android:name="JPUSH_CHANNEL"
+         android:value="developer-default" />
 
-        <!-- Required. For publish channel feature -->
-        <!-- JPUSH_CHANNEL 是为了方便开发者统计APK分发渠道。-->
-        <!-- 例如: -->
-        <!-- 发到 Google Play 的APK可以设置为 google-play; -->
-        <!-- 发到其他市场的 APK 可以设置为 xxx-market。 -->
-        <!-- 目前这个渠道统计功能的报表还未开放。-->
+         <!-- Required. AppKey copied from Portal -->
+         <meta-data
+         android:name="JPUSH_APPKEY"
+         android:value="4ab8b4dbfd37a5a2e60e3a57" />
+         <!--极光im-->
+
+        <!-- 讯飞 -->
         <meta-data
-            android:name="JPUSH_CHANNEL"
-            android:value="developer-default" />
-
-        <!-- Required. AppKey copied from Portal -->
+            android:name="IFLYTEK_APPKEY"
+            android:value="@string/XunFeiAppKey"/>
         <meta-data
-            android:name="JPUSH_APPKEY"
-            android:value="4ab8b4dbfd37a5a2e60e3a57" />
-        <!--极光im-->
-
-
-        <!--讯飞-->
-        <meta-data android:name="IFLYTEK_APPKEY"
-                   android:value="@string/XunFeiAppKey"/>
-        <meta-data android:name="IFLYTEK_CHANNEL"
-                   android:value="your_channel"/>
+            android:name="IFLYTEK_CHANNEL"
+            android:value="your_channel"/>
         !-- push service start -->
-        <!-- Push 服务  -->
+        <!-- Push 服务 -->
         <service
             android:name="com.iflytek.pushclient.manager.PushService"
             android:exported="true"
-            android:process=":xpush"></service>
-        <!--  用于接收系统消息以保证PushService正常运行  -->
+            android:process=":xpush"/>
+        <!-- 用于接收系统消息以保证PushService正常运行 -->
         <receiver
             android:name="com.iflytek.pushclient.manager.PushServiceReceiver"
             android:process=":xpush">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="com.iflytek.pushclient.action.notification.SHOW" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="com.iflytek.pushclient.action.notification.SHOW"/>
             </intent-filter>
         </receiver>
-        <!-- Push服务接收客户端发送的各种请求-->
+        <!-- Push服务接收客户端发送的各种请求 -->
         <receiver
             android:name="com.iflytek.pushclient.manager.RegistrationReceiver"
             android:process=":xpush">
             <intent-filter>
-                <action android:name="com.iflytek.pushclient.action.METHOD" />
-                <action android:name="com.iflytek.pushclient.action.BIND_SYNC" />
+                <action android:name="com.iflytek.pushclient.action.METHOD"/>
+                <action android:name="com.iflytek.pushclient.action.BIND_SYNC"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <data android:scheme="package" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+
+                <data android:scheme="package"/>
             </intent-filter>
         </receiver>
-
         <receiver android:name=".base.receiver.MyPushReceiver">
             <intent-filter>
-                <!--  接收 push消息  -->
-                <action android:name="com.iflytek.pushclient.action.MESSAGE" />
-                <!--  接收 bind、unbind等method 的返回结果  -->
-                <action android:name="com.iflytek.pushclient.action.RECEIVE" />
-                <!--  可选。接受通知点击事件,删除事件和通知自定义内容  -->
-                <action android:name="com.iflytek.pushclient.action.notification.CLICK" />
-                <action android:name="com.iflytek.pushclient.action.notification.DELETE" />
+
+                <!-- 接收 push消息 -->
+                <action android:name="com.iflytek.pushclient.action.MESSAGE"/>
+                <!-- 接收 bind、unbind等method 的返回结果 -->
+                <action android:name="com.iflytek.pushclient.action.RECEIVE"/>
+                <!-- 可选。接受通知点击事件,删除事件和通知自定义内容 -->
+                <action android:name="com.iflytek.pushclient.action.notification.CLICK"/>
+                <action android:name="com.iflytek.pushclient.action.notification.DELETE"/>
             </intent-filter>
         </receiver>
-        <!--讯飞-->
-
+        <!-- 讯飞 -->
 
         <activity
             android:name=".MainActivity"
@@ -253,6 +258,8 @@
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".FindPasswordActivity"/>
         <activity android:name=".SetPasswordActivity"/>
+        <activity android:name=".one.TXActivity">
+        </activity>
     </application>
 
 </manifest>

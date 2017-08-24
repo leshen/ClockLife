@@ -20,6 +20,7 @@ import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.aitangba.swipeback.ActivityLifecycleHelper
 import com.jakewharton.rxbinding2.view.RxView
 import com.trello.rxlifecycle2.android.ActivityEvent
 import io.reactivex.Observable
@@ -179,7 +180,7 @@ object UIUtils {
     }
 
     fun startActivity(cl: Class<*>, bundle: Bundle?, bundlename: String) {
-        val activity = BaseApplication.foregroundActivity
+        val activity = ActivityLifecycleHelper.getLatestActivity()
         val intent = Intent(activity, cl)
         if (bundle != null) {
             intent.putExtra(bundlename, bundle)
@@ -194,7 +195,7 @@ object UIUtils {
     }
 
     fun startActivity(intent: Intent) {
-        val activity = BaseApplication.foregroundActivity
+        val activity = ActivityLifecycleHelper.getLatestActivity()
         if (activity != null) {
             activity.startActivity(intent)
         } else {
@@ -204,7 +205,7 @@ object UIUtils {
     }
 
     fun startActivity(cl: Class<*>) {
-        val activity = BaseApplication.foregroundActivity
+        val activity = ActivityLifecycleHelper.getLatestActivity()
         val intent = Intent(activity, cl)
         if (activity != null) {
             //           intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -216,7 +217,7 @@ object UIUtils {
     }
 
     fun startActivityForResult(cl: Class<*>, requestcode: Int) {
-        val activity = BaseApplication.foregroundActivity
+        val activity = ActivityLifecycleHelper.getLatestActivity()
         val intent = Intent(activity, cl)
         if (activity != null) {
             //            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -228,7 +229,7 @@ object UIUtils {
     }
 
     fun startActivityForResult(cl: Class<*>, bundle: Bundle?, requestcode: Int) {
-        val activity = BaseApplication.foregroundActivity
+        val activity = ActivityLifecycleHelper.getLatestActivity()
         val intent = Intent(activity, cl)
         if (bundle != null) {
             intent.putExtras(bundle)
@@ -243,7 +244,7 @@ object UIUtils {
     }
 
     fun startActivity(cl: Class<*>, bundle: Bundle?) {
-        val activity = BaseApplication.foregroundActivity
+        val activity = ActivityLifecycleHelper.getLatestActivity()
         val intent = Intent(activity, cl)
         if (bundle != null) {
             intent.putExtras(bundle)
@@ -280,7 +281,7 @@ object UIUtils {
     }
 
     private fun showToast(str: String) {
-        val frontActivity = BaseApplication.foregroundActivity
+        val frontActivity = ActivityLifecycleHelper.getLatestActivity()
         if (frontActivity != null) {
             if (toast == null) {
                 toast = Toast.makeText(frontActivity, str, Toast.LENGTH_LONG)
@@ -376,7 +377,7 @@ object UIUtils {
     }
 
     fun getActivity(): Activity?{
-        return BaseApplication.foregroundActivity
+        return ActivityLifecycleHelper.getLatestActivity()
     }
 
 
