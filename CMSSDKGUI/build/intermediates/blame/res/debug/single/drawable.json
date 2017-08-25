@@ -20,12 +20,12 @@
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\src\\main\\res\\drawable\\cmssdk_default_progressbar.xml"
     },
     {
-        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\debug\\drawable\\umssdk_default_request_accept_btn.xml",
-        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\src\\main\\res\\drawable\\umssdk_default_request_accept_btn.xml"
-    },
-    {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\debug\\drawable\\cmssdk_default_comment_count_bg.xml",
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\src\\main\\res\\drawable\\cmssdk_default_comment_count_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\debug\\drawable\\umssdk_default_request_accept_btn.xml",
+        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\src\\main\\res\\drawable\\umssdk_default_request_accept_btn.xml"
     },
     {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\debug\\drawable\\umssdk_default_dialog_btn_right.xml",

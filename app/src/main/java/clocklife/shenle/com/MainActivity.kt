@@ -1,6 +1,11 @@
 package clocklife.shenle.com
 
+import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.support.design.widget.NavigationView
+import android.support.v7.widget.Toolbar
+import android.view.KeyEvent
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
@@ -9,24 +14,34 @@ import clocklife.shenle.com.db.bean.AppUserInfo
 import clocklife.shenle.com.db.bean.AppUserInfo_Table
 import clocklife.shenle.com.help.MyUtils
 import clocklife.shenle.com.one.fragment.*
+import cn.jpush.im.android.api.JMessageClient
 import com.bumptech.glide.Glide
 import com.mob.ums.OperationCallback
 import com.mob.ums.UMSSDK
 import jp.wasabeef.glide.transformations.CropCircleTransformation
+import kotlinx.android.synthetic.main.base_toolbar.*
 import slmodule.shenle.com.BaseFragment
 import slmodule.shenle.com.BaseMainActivity
 import slmodule.shenle.com.db.DBHelper
 import slmodule.shenle.com.utils.UIUtils
-import android.content.Intent
-import android.os.Handler
-import android.view.KeyEvent
-import android.widget.Toast
-import android.view.KeyEvent.KEYCODE_BACK
-import cn.jpush.im.android.api.JMessageClient
-import cn.jpush.im.api.BasicCallback
+import com.bumptech.glide.DrawableTypeRequest
 
 
 class MainActivity : BaseMainActivity() {
+
+    override fun toolbarSetting(toolbar: Toolbar?) {
+        toolbar?.setTitle("首页")
+        toolbar?.setTitleTextColor(UIUtils.getColor(R.color.text_color_5))
+        var bitmapDrawable :Drawable?=null
+        if (!UIUtils.isEmpty(BaseAppState.userPhoto)) {
+            val bmp = (Glide.with(this).load(BaseAppState.userPhoto).bitmapTransform(CropCircleTransformation(this)) as DrawableTypeRequest<String>).asBitmap().into(150,150).get() as Bitmap
+            bitmapDrawable = BitmapDrawable(bmp)
+        }else{
+            bitmapDrawable = UIUtils.getDrawable(R.mipmap.login)
+        }
+        toolbar?.navigationIcon = bitmapDrawable
+    }
+
     override fun initNavHeaderView(navigationView: NavigationView) {
         val headerView= navigationView.getHeaderView(0)
         headerView.findViewById(R.id.ll_login).setOnClickListener{
@@ -60,7 +75,15 @@ class MainActivity : BaseMainActivity() {
                 FourFragment.getInstance(),
                 FiveFragment.getInstance())
     }
-
+    override fun changePage(position: Int) {
+        when(position){
+            0->toolbar.setTitle("首页")
+            1->toolbar.setTitle("2")
+            2->toolbar.setTitle("3")
+            3->toolbar.setTitle("4")
+            4->toolbar.setTitle("5")
+        }
+    }
     override fun on2NavigationItemSelected(item: MenuItem) {
         // Handle navigation view item clicks here.
         val id = item.itemId

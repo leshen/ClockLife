@@ -6,15 +6,16 @@ import clocklife.shenle.com.R
 import slmodule.shenle.com.BaseFragment
 
 /**
- * 我的提醒
+ * 提醒
  * Created by shenle on 2017/8/23.
  */
-class MyTxFragment : BaseFragment(){
+class TXSelfFragment :BaseFragment(){
     override fun getTitle(): CharSequence {
-        return "收到"
+        return "自己"
     }
+
     override fun getRootView(): Int {
-        return R.layout.fragment_my_tx
+        return R.layout.fragment_tx_edit
     }
 
     override fun initOnCreateView(view: View?, savedInstanceState: Bundle?) {
@@ -24,8 +25,8 @@ class MyTxFragment : BaseFragment(){
     override fun refresh() {
     }
     companion object {
-        fun getInstance(): MyTxFragment {
-            return MyTxFragment()
+        fun getInstance(): TXSelfFragment {
+            return TXSelfFragment()
         }
     }
 }

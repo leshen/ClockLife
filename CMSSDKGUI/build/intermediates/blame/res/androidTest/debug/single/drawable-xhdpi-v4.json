@@ -4,12 +4,12 @@
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\umssdk_default_sinaweibo.png"
     },
     {
-        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\cmssdk_default_arrow_down.png",
-        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\cmssdk_default_arrow_down.png"
-    },
-    {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\umssdk_default_tab_recommend_unsel.png",
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\umssdk_default_tab_recommend_unsel.png"
+    },
+    {
+        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\cmssdk_default_arrow_down.png",
+        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\cmssdk_default_arrow_down.png"
     },
     {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\cmssdk_default_input_comment_white_pan.png",
@@ -24,12 +24,12 @@
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\umssdk_defalut_gender_m.png"
     },
     {
-        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\umssdk_default_tab_profile_sel.png",
-        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\umssdk_default_tab_profile_sel.png"
-    },
-    {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ssdk_auth_title_back.png",
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\MobAPI\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\ssdk_auth_title_back.png"
+    },
+    {
+        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\umssdk_default_tab_profile_sel.png",
+        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\umssdk_default_tab_profile_sel.png"
     },
     {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\umssdk_default_old_password.png",
@@ -52,12 +52,12 @@
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\cmssdk_default_like_press.png"
     },
     {
-        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\umssdk_default_go_details.png",
-        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\umssdk_default_go_details.png"
-    },
-    {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\cmssdk_default_vp_bar_toview.png",
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\cmssdk_default_vp_bar_toview.png"
+    },
+    {
+        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\umssdk_default_go_details.png",
+        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\umssdk_default_go_details.png"
     },
     {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\cmssdk_default_vp_play.png",
@@ -152,12 +152,12 @@
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\cmssdk_default_comment_white_msg.png"
     },
     {
-        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\umssdk_default_vcode_binded.png",
-        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\umssdk_default_vcode_binded.png"
-    },
-    {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ssdk_back_arr.png",
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\MobAPI\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\ssdk_back_arr.png"
+    },
+    {
+        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\umssdk_default_vcode_binded.png",
+        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\umssdk_default_vcode_binded.png"
     },
     {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\umssdk_default_add_block.png",

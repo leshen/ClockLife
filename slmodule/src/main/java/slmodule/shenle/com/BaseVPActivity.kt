@@ -1,6 +1,5 @@
 package slmodule.shenle.com
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v7.widget.Toolbar
@@ -11,8 +10,11 @@ open abstract class BaseVPActivity : BaseActivity() {
 
     override fun initToolBar(): Toolbar? {
         toolbar.setTitle("")
+        toolbarSetting(toolbar)
         return toolbar
     }
+
+    open fun toolbarSetting(toolbar: Toolbar){}
 
     override fun getRootView(): Int {
         return R.layout.activity_base_vp
@@ -43,7 +45,7 @@ open abstract class BaseVPActivity : BaseActivity() {
 
     private var  adapter: BasePagerAdapter?=null
     private fun initVp() {
-        viewpager?.setOffscreenPageLimit(titleArr.size)
+//        viewpager?.setOffscreenPageLimit(titleArr.size)
         adapter = BasePagerAdapter(
                 supportFragmentManager, getListFragment())
         viewpager?.adapter = adapter
@@ -51,5 +53,5 @@ open abstract class BaseVPActivity : BaseActivity() {
 
     abstract fun getListFragment(): List<BaseFragment>?
 
-    abstract var titleArr:Array<String>
+//    abstract var titleArr:Array<String>
 }

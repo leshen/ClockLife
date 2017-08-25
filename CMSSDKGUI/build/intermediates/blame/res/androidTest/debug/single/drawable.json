@@ -8,24 +8,24 @@
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable\\cmssdk_default_comment_count_bg.xml"
     },
     {
-        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\umssdk_default_avatar_round_bg.xml",
-        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable\\umssdk_default_avatar_round_bg.xml"
-    },
-    {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\cmssdk_default_input_comment_black_bg.xml",
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable\\cmssdk_default_input_comment_black_bg.xml"
     },
     {
-        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\umssdk_default_dialog_btn_right.xml",
-        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable\\umssdk_default_dialog_btn_right.xml"
+        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\umssdk_default_avatar_round_bg.xml",
+        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable\\umssdk_default_avatar_round_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\umssdk_default_dialog_button.xml",
+        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable\\umssdk_default_dialog_button.xml"
     },
     {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\umssdk_defalut_new_request.xml",
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable\\umssdk_defalut_new_request.xml"
     },
     {
-        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\umssdk_default_dialog_button.xml",
-        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable\\umssdk_default_dialog_button.xml"
+        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\umssdk_default_dialog_btn_right.xml",
+        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\bundles\\debug\\res\\drawable\\umssdk_default_dialog_btn_right.xml"
     },
     {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\cmssdk_default_playtime_bg.xml",

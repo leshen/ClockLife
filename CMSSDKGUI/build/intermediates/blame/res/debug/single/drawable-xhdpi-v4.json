@@ -16,12 +16,12 @@
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\MobAPI\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\ssdk_auth_title_back.png"
     },
     {
-        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\cmssdk_default_comment_icon.png",
-        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\src\\main\\res\\drawable-xhdpi\\cmssdk_default_comment_icon.png"
-    },
-    {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\cmssdk_default_vp_play.png",
         "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\src\\main\\res\\drawable-xhdpi\\cmssdk_default_vp_play.png"
+    },
+    {
+        "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\cmssdk_default_comment_icon.png",
+        "source": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\src\\main\\res\\drawable-xhdpi\\cmssdk_default_comment_icon.png"
     },
     {
         "merged": "C:\\Users\\le\\Documents\\GitHub\\ClockLife\\CMSSDKGUI\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\umssdk_default_tab_recommend_sel.png",

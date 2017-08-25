@@ -75,7 +75,7 @@ open class BaseApplication : MultiDexApplication() {
      */
     open fun initLib() {
         JMessageClient.init(applicationContext,true)
-        JMessageClient.setDebugMode(true)
+//        JMessageClient.setDebugMode(true)
     }
 
 

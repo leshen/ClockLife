@@ -2,11 +2,15 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme"
-           parent="Theme.AppCompat.Light.NoActionBar">
+           parent="AppTheme.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/bg_1</item>
         <item name="colorPrimaryDark">@color/bg_1_press</item>
         <item name="colorAccent">@color/bg_1</item>
+    </style>
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.DayNight">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
     <!--欢迎页面主题-->
     <style name="AppTheme.FullScreen" parent="AppTheme">
