@@ -18,7 +18,6 @@ import android.view.View
 import android.view.animation.OvershootInterpolator
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
-import com.bumptech.glide.Glide
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_base_main.*
 import kotlinx.android.synthetic.main.base_toolbar.*
@@ -27,11 +26,8 @@ import kotlinx.android.synthetic.main.content_base_main.*
 
 abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     override fun initToolBar(): Toolbar? {
-        toolbarSetting(toolbar)
         return toolbar
     }
-
-    abstract fun toolbarSetting(toolbar: Toolbar?)
 
     override fun supportSlideBack(): Boolean {
         return false
@@ -39,7 +35,7 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
     override fun getRootView(): Int{
         val enabledTranslucentNavigation = getSharedPreferences("shared", Context.MODE_PRIVATE)
                 .getBoolean("translucentNavigation", false)
-        setTheme(if (enabledTranslucentNavigation) R.style.AppTheme_TranslucentNavigation else R.style.AppTheme)
+//        setTheme(if (enabledTranslucentNavigation) R.style.AppTheme_TranslucentNavigation else R.style.AppTheme)
         return R.layout.activity_base_main
     }
     override fun initOnCreate(savedInstanceState: Bundle?) {
@@ -224,13 +220,13 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
                     1->isMakeScrollow = 3
                 }
                 bottomNavigation.setCurrentItem(position,true)
-                changePage(position)
+                changePage(position,toolbar)
             }
 
         })
     }
 
-    open fun changePage(position: Int) {
+    open fun changePage(position: Int, toolbar: Toolbar) {
     }
 
     abstract fun getMenuStrResArr(): IntArray

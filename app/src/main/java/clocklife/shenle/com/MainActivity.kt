@@ -19,40 +19,54 @@ import com.bumptech.glide.Glide
 import com.mob.ums.OperationCallback
 import com.mob.ums.UMSSDK
 import jp.wasabeef.glide.transformations.CropCircleTransformation
-import kotlinx.android.synthetic.main.base_toolbar.*
 import slmodule.shenle.com.BaseFragment
 import slmodule.shenle.com.BaseMainActivity
 import slmodule.shenle.com.db.DBHelper
 import slmodule.shenle.com.utils.UIUtils
-import com.bumptech.glide.DrawableTypeRequest
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.base_toolbar.*
+import slmodule.shenle.com.utils.BitmapUtils
 
 
 class MainActivity : BaseMainActivity() {
-
-    override fun toolbarSetting(toolbar: Toolbar?) {
+    override fun initToolBar(): Toolbar? {
         toolbar?.setTitle("首页")
+        return toolbar
+    }
+    override fun toolbar2Setting(toolbar: Toolbar?) {
+        toolbar?.setBackgroundColor(UIUtils.getColor(R.color.bg_1))
         toolbar?.setTitleTextColor(UIUtils.getColor(R.color.text_color_5))
-        var bitmapDrawable :Drawable?=null
-        if (!UIUtils.isEmpty(BaseAppState.userPhoto)) {
-            val bmp = (Glide.with(this).load(BaseAppState.userPhoto).bitmapTransform(CropCircleTransformation(this)) as DrawableTypeRequest<String>).asBitmap().into(150,150).get() as Bitmap
-            bitmapDrawable = BitmapDrawable(bmp)
-        }else{
-            bitmapDrawable = UIUtils.getDrawable(R.mipmap.login)
-        }
-        toolbar?.navigationIcon = bitmapDrawable
+        Observable.create<Drawable> {
+            var bitmapDrawable: Drawable
+            if (!UIUtils.isEmpty(BaseAppState.userPhoto)) {
+                val bmp = Glide.with(this).load(BaseAppState.userPhoto).asBitmap().into(150, 150).get() as Bitmap
+                bitmapDrawable = BitmapDrawable(BitmapUtils.makeRoundCorner(bmp))
+            } else {
+                bitmapDrawable = UIUtils.getDrawable(R.mipmap.login)
+            }
+            it.onNext(bitmapDrawable)
+            it.onComplete()
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.bindToLifecycle())
+                .subscribe({
+                    toolbar?.navigationIcon = it
+                })
     }
 
     override fun initNavHeaderView(navigationView: NavigationView) {
-        val headerView= navigationView.getHeaderView(0)
-        headerView.findViewById(R.id.ll_login).setOnClickListener{
-            if (MyUtils.isLogin()){
+        val headerView = navigationView.getHeaderView(0)
+        headerView.findViewById(R.id.ll_login).setOnClickListener {
+            if (MyUtils.isLogin()) {
                 //去个人中心
-                UIUtils.showSnackBar(it,"个人中心")
+                UIUtils.showSnackBar(it, "个人中心")
             }
         }
         (headerView.findViewById(R.id.tv_name) as TextView).text = BaseAppState.userName
         var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true))
-        if (appUserInfo!=null) {
+        if (appUserInfo != null) {
             (headerView.findViewById(R.id.tv_sign) as TextView).text = appUserInfo.sign
             var ivPhoto = headerView.findViewById(R.id.iv_photo) as ImageView
             Glide.with(this).load(appUserInfo.photo).bitmapTransform(CropCircleTransformation(this)).into(ivPhoto)
@@ -60,14 +74,15 @@ class MainActivity : BaseMainActivity() {
     }
 
     override fun getMenuStrResArr(): IntArray {
-        return intArrayOf(R.string.menu_a,R.string.menu_b,R.string.menu_c,R.string.menu_d,R.string.menu_e)
+        return intArrayOf(R.string.menu_a, R.string.menu_b, R.string.menu_c, R.string.menu_d, R.string.menu_e)
     }
 
     companion object {
-        fun goHere(){
+        fun goHere() {
             UIUtils.startActivity(MainActivity::class.java)
         }
     }
+
     override fun getListFragment(): List<BaseFragment> {
         return listOf(OneFragment.getInstance(),
                 TwoFragment.getInstance(),
@@ -75,15 +90,17 @@ class MainActivity : BaseMainActivity() {
                 FourFragment.getInstance(),
                 FiveFragment.getInstance())
     }
-    override fun changePage(position: Int) {
-        when(position){
-            0->toolbar.setTitle("首页")
-            1->toolbar.setTitle("2")
-            2->toolbar.setTitle("3")
-            3->toolbar.setTitle("4")
-            4->toolbar.setTitle("5")
+
+    override fun changePage(position: Int, toolbar: Toolbar) {
+        when (position) {
+            0 -> toolbar.setTitle("首页")
+            1 -> toolbar.setTitle("2")
+            2 -> toolbar.setTitle("3")
+            3 -> toolbar.setTitle("4")
+            4 -> toolbar.setTitle("5")
         }
     }
+
     override fun on2NavigationItemSelected(item: MenuItem) {
         // Handle navigation view item clicks here.
         val id = item.itemId
@@ -101,16 +118,16 @@ class MainActivity : BaseMainActivity() {
         } else if (id == slmodule.shenle.com.R.id.nav_login_out) {
             //注销
             dialog.show()
-            UMSSDK.logout(object : OperationCallback<Void>(){
+            UMSSDK.logout(object : OperationCallback<Void>() {
                 override fun onSuccess(p0: Void?) {
                     dialog.dismiss()
-                    var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java,AppUserInfo_Table.hasLogin.eq(true))
+                    var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true))
                     appUserInfo?.hasLogin = false
                     appUserInfo.update()
                     BaseAppState.clear()
                     JMessageClient.logout()
                     InitActivity.goHere()
-                    UIUtils.finishDelay(2,this@MainActivity)
+                    UIUtils.finishDelay(2, this@MainActivity)
                 }
 
                 override fun onFailed(p0: Throwable?) {

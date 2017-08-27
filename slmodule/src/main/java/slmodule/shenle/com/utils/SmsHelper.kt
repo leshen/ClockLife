@@ -1,4 +1,4 @@
-package main.src.sms
+package slmodule.shenle.com.utils
 
 import android.content.Context
 import android.graphics.Color
@@ -8,7 +8,6 @@ import android.text.TextUtils
 import android.widget.TextView
 import cn.smssdk.SMSSDK
 import cn.smssdk.utils.SMSLog
-
 
 /**
  * Created by shenle on 2017/8/14.
@@ -25,17 +24,17 @@ class SmsHelper {
          */
         fun sendYZM(phone: String, tv_code: TextView) {
             country_code = "+${getCurrentCountry(tv_code.context)?.get(1)}"
-            SMSSDK.getVerificationCode(country_code,phone)
+            SMSSDK.getVerificationCode(country_code, phone)
             /**
              * 倒计时 30秒后可以重新发送验证码
              */
             val mc = MyCountTime((30 * 1000).toLong(), 1000, tv_code)
             mc.start()
         }
-        fun onSubmit(context:Context,phone: String, code:String){
+        fun onSubmit(context: Context, phone: String, code:String){
             if(country_code.isEmpty())
                 country_code = "+${getCurrentCountry(context)?.get(1)}"
-            SMSSDK.submitVerificationCode(country_code,phone,code)
+            SMSSDK.submitVerificationCode(country_code, phone, code)
         }
 
         fun getMCC(context : Context): String {

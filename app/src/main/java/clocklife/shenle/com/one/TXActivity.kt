@@ -3,13 +3,11 @@ package clocklife.shenle.com.one
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toast
-import clocklife.shenle.com.MainActivity
 import clocklife.shenle.com.R
 import clocklife.shenle.com.one.fragment.MySendTxFragment
 import clocklife.shenle.com.one.fragment.MyTxFragment
 import clocklife.shenle.com.one.fragment.TXSelfFragment
+import com.readystatesoftware.systembartint.SystemBarTintManager
 import slmodule.shenle.com.BaseFragment
 import slmodule.shenle.com.BaseVPActivity
 import slmodule.shenle.com.utils.UIUtils
@@ -29,7 +27,9 @@ class TXActivity : BaseVPActivity() {
     override fun getListFragment(): List<BaseFragment>? {
         return listOf(TXSelfFragment.getInstance(),MyTxFragment.getInstance(), MySendTxFragment.getInstance())
     }
-
+    override fun setSystemBarTintColor(tintManager: SystemBarTintManager): Int {
+        return slmodule.shenle.com.R.color.text_color_5
+    }
 
 //    override var titleArr: Array<String>
 //        get() = arrayOf("我的提醒", "提醒别人")
@@ -47,11 +47,12 @@ class TXActivity : BaseVPActivity() {
         return true
     }
 
-    override fun toolbarSetting(toolbar: Toolbar) {
-        toolbar.setOnMenuItemClickListener({
+    override fun toolbar2Setting(toolbar: Toolbar?) {
+        toolbar?.setOnMenuItemClickListener({
                 when (it.getItemId()) {
                     R.id.action_fatie->{
-
+                        //发帖
+                        FaTieTXActivity.goHere(0)
                     }
                 }
                 true

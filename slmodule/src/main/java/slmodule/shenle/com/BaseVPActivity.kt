@@ -10,11 +10,9 @@ open abstract class BaseVPActivity : BaseActivity() {
 
     override fun initToolBar(): Toolbar? {
         toolbar.setTitle("")
-        toolbarSetting(toolbar)
         return toolbar
     }
 
-    open fun toolbarSetting(toolbar: Toolbar){}
 
     override fun getRootView(): Int {
         return R.layout.activity_base_vp

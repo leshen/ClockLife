@@ -12,10 +12,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.iflytek.sunflower.FlowerCollector
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import kotlinx.android.synthetic.main.activity_base_vp.*
 import slmodule.shenle.com.data.Constants
 import slmodule.shenle.com.dialog.LoadingDialog
 import slmodule.shenle.com.utils.SwipeBackHelper
-
+import com.readystatesoftware.systembartint.SystemBarTintManager
+import android.view.WindowManager
+import android.os.Build
+import com.readystatesoftware.systembartint.SystemBarTintManager.SystemBarConfig
 
 /**
  * Created by shenle on 2017/7/31.
@@ -28,7 +32,7 @@ abstract class BaseActivity : RxAppCompatActivity(), SwipeBackHelper.SlideBackMa
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dialog = LoadingDialog(this,R.style.LoadingDialog)
+       dialog = LoadingDialog(this,R.style.LoadingDialog)
         is_init = getIntent().getBooleanExtra("is_init", false)
         var s: String? = null
         try {
@@ -42,12 +46,38 @@ abstract class BaseActivity : RxAppCompatActivity(), SwipeBackHelper.SlideBackMa
         val toolBar = initToolBar()
         setSupportActionBar(toolBar)
         toolBar?.setNavigationOnClickListener { onBack(it) }
+        toolbar2Setting(toolBar)
         initOnCreate(savedInstanceState)
         if (Constants.isTest){
             onTest()
         }
+        if (toolBar!=null&&Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            //透明导航栏
+//            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+            val tintManager = SystemBarTintManager(this)
+            // 激活状态栏
+            tintManager.isStatusBarTintEnabled = true
+            // enable navigation bar tint 激活导航栏
+//            tintManager.setNavigationBarTintEnabled(true)
+            val config = tintManager.config
+            toolBar.setPadding(0, config.getPixelInsetTop(true), config.pixelInsetRight, config.pixelInsetBottom)
+            //设置系统栏设置颜色
+//            tintManager.setTintColor(R.color.text_color_9);
+            //Apply the specified drawable or color resource to the system navigation bar.
+            //给导航栏设置资源
+//            tintManager.setNavigationBarTintResource(R.color.text_color_8);
+            //给状态栏设置颜色
+            tintManager.setStatusBarTintResource(setSystemBarTintColor(tintManager))
+        }
     }
 
+    open fun setSystemBarTintColor(tintManager: SystemBarTintManager): Int {
+        return R.color.text_color_2
+    }
+
+    open fun toolbar2Setting(toolbar: Toolbar?){}
     abstract fun initToolBar():Toolbar?
 
     abstract fun getRootView(): Int

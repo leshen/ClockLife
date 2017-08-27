@@ -260,6 +260,7 @@
         <activity android:name=".SetPasswordActivity"/>
         <activity android:name=".one.TXActivity">
         </activity>
+        <activity android:name=".one.FaTieTXActivity" />
     </application>
 
 </manifest>

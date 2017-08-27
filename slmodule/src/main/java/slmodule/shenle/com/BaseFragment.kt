@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils
 import android.view.animation.Animation
 import com.iflytek.sunflower.FlowerCollector
 import slmodule.shenle.com.utils.UIUtils
+import slmodule.shenle.com.R
 
 
 /**
