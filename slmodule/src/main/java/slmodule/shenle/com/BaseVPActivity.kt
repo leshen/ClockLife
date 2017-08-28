@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_base_vp.*
 import slmodule.shenle.com.utils.UIUtils
 
-open abstract class BaseVPActivity : BaseActivity() {
+abstract class BaseVPActivity : BaseActivity() {
 
     override fun initToolBar(): Toolbar? {
         toolbar.setTitle("")

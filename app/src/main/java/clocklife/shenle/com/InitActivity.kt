@@ -23,7 +23,7 @@ class InitActivity : BaseActivity() {
     }
 
     override fun initOnCreate(savedInstanceState: Bundle?) {
-        var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true)!!)
+        var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true))
         if (appUserInfo != null) {
             BaseAppState.userUid = appUserInfo.uid
             BaseAppState.userName = appUserInfo.name

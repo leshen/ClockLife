@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import kotlinx.android.synthetic.main.base_toolbar.*
 
-open abstract class BaseFLActivity : BaseActivity() {
+abstract class BaseFLActivity : BaseActivity() {
 
     override fun initToolBar(): Toolbar? {
         toolbar.setTitle(titleArr[checknum])

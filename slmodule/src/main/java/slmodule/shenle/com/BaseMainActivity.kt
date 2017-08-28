@@ -33,8 +33,8 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
         return false
     }
     override fun getRootView(): Int{
-        val enabledTranslucentNavigation = getSharedPreferences("shared", Context.MODE_PRIVATE)
-                .getBoolean("translucentNavigation", false)
+//        val enabledTranslucentNavigation = getSharedPreferences("shared", Context.MODE_PRIVATE)
+//                .getBoolean("translucentNavigation", false)
 //        setTheme(if (enabledTranslucentNavigation) R.style.AppTheme_TranslucentNavigation else R.style.AppTheme)
         return R.layout.activity_base_main
     }

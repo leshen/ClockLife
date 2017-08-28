@@ -10,7 +10,7 @@ import slmodule.shenle.com.utils.UIUtils
 /**
  * Created by shenle on 2017/8/23.
  */
-open abstract class BaseTopVpFragment : BaseFragment(){
+abstract class BaseTopVpFragment : BaseFragment(){
     override fun getRootView(): Int {
         return R.layout.fragment_base_vp_top
     }
@@ -27,7 +27,7 @@ open abstract class BaseTopVpFragment : BaseFragment(){
         setTabLayoutAtt(view?.tablayout)
         view?.tablayout?.getTabAt(0)?.select()
 //        将ViewPager与TabLayout关联
-        view?.tablayout?.setupWithViewPager(view?.viewpager,true)
+        view?.tablayout?.setupWithViewPager(view.viewpager,true)
     }
 
     fun setTabLayoutAtt(tablayout: TabLayout?) {
