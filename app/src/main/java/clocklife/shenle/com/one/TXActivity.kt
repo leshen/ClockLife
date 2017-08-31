@@ -1,16 +1,22 @@
 package clocklife.shenle.com.one
 
 import android.os.Bundle
+import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.Toolbar
 import android.view.Menu
+import android.view.View
 import clocklife.shenle.com.R
 import clocklife.shenle.com.one.fragment.MySendTxFragment
 import clocklife.shenle.com.one.fragment.MyTxFragment
 import clocklife.shenle.com.one.fragment.TXSelfFragment
+import clocklife.shenle.com.one.view.FaTieTsComponent
 import com.readystatesoftware.systembartint.SystemBarTintManager
+import slmodule.guide.view.Guide
+import slmodule.guide.view.GuideBuilder
 import slmodule.shenle.com.BaseFragment
 import slmodule.shenle.com.BaseVPActivity
 import slmodule.shenle.com.utils.UIUtils
+
 
 /**
  * 提醒:(需求)
@@ -47,6 +53,13 @@ class TXActivity : BaseVPActivity() {
         return true
     }
 
+    override fun onPrepareOptionsMenu( menu: Menu?): Boolean {
+        val item = menu?.findItem(R.id.action_fatie)
+        val actionView = MenuItemCompat.getActionView(item)
+        actionView?.post { showGuideView(actionView) }
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun toolbar2Setting(toolbar: Toolbar?) {
         toolbar?.setOnMenuItemClickListener({
                 when (it.getItemId()) {
@@ -60,7 +73,30 @@ class TXActivity : BaseVPActivity() {
     }
     override fun initOnCreate(savedInstanceState: Bundle?) {
         super.initOnCreate(savedInstanceState)
+    }
 
+    private var guide: Guide? =null
 
+    fun showGuideView(view: View) {
+        val builder = GuideBuilder()
+        builder.setTargetView(view)
+                .setAlpha(150)
+                .setHighTargetCorner(20)
+                .setHighTargetPadding(10)
+                .setOverlayTarget(false)
+                .setOutsideTouchable(false)
+        builder.setOnVisibilityChangedListener(object : GuideBuilder.OnVisibilityChangedListener {
+            override fun onShown() {}
+
+            override fun onDismiss() {
+//                showGuideView2()
+                FaTieTXActivity.goHere(0)
+            }
+        })
+
+        builder.addComponent(FaTieTsComponent())
+        guide = builder.createGuide()
+        guide?.setShouldCheckLocInWindow(false)
+        guide?.show(this@TXActivity)
     }
 }

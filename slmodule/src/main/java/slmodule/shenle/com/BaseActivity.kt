@@ -20,6 +20,9 @@ import com.readystatesoftware.systembartint.SystemBarTintManager
 import android.view.WindowManager
 import android.os.Build
 import com.readystatesoftware.systembartint.SystemBarTintManager.SystemBarConfig
+import android.view.ViewGroup
+
+
 
 /**
  * Created by shenle on 2017/7/31.
@@ -141,6 +144,10 @@ abstract class BaseActivity : RxAppCompatActivity(), SwipeBackHelper.SlideBackMa
     override fun onResume() {
         super.onResume()
         FlowerCollector.onResume(this)
+    }
+
+    fun getCurrentRootView(): View {
+        return (findViewById(android.R.id.content) as ViewGroup).getChildAt(0)
     }
 
     override fun onPause() {

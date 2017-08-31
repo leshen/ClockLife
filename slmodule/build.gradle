@@ -26,8 +26,27 @@ android {
     productFlavors {
     }
 }
-
-
+apply plugin: 'replugin-host-gradle'
+/**
+ * 配置项均为可选配置，默认无需添加
+ * 更多可选配置项参见replugin-host-gradle的RepluginConfig类
+ * 可更改配置项参见 自动生成RePluginHostConfig.java
+ */
+repluginHostConfig {
+    /**
+     * 是否使用 AppCompat 库
+     * 不需要个性化配置时，无需添加
+     */
+    useAppCompat = true
+    /**
+     * 背景不透明的坑的数量
+     * 不需要个性化配置时，无需添加
+     */
+    countNotTranslucentStandard = 6
+    countNotTranslucentSingleTop = 2
+    countNotTranslucentSingleTask = 3
+    countNotTranslucentSingleInstance = 2
+}
 dependencies {
     apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
     // 隔开
@@ -70,9 +89,11 @@ dependencies {
     compile 'com.aitangba:swipeback:1.0.1'
     //滑动返回
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.4'
+    //360插件化
+    compile 'com.qihoo360.replugin:replugin-host-lib:2.2.0'
+
 }
 repositories {
-
     //    mavenCentral()
     jcenter()
     maven { url 'https://jitpack.io' }

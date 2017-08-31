@@ -12,6 +12,8 @@ buildscript {
 
         //dbflow
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        //360插件化
+        classpath 'com.qihoo360.replugin:replugin-host-gradle:2.2.0'
     }
 }
 
