@@ -5,6 +5,7 @@ import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.View
+import android.widget.ImageView
 import clocklife.shenle.com.R
 import clocklife.shenle.com.one.fragment.MySendTxFragment
 import clocklife.shenle.com.one.fragment.MyTxFragment
@@ -54,9 +55,13 @@ class TXActivity : BaseVPActivity() {
     }
 
     override fun onPrepareOptionsMenu( menu: Menu?): Boolean {
-        val item = menu?.findItem(R.id.action_fatie)
-        val actionView = MenuItemCompat.getActionView(item)
-        actionView?.post { showGuideView(actionView) }
+//        val item = menu?.findItem(R.id.action_fatie)
+//        val qrView = ImageView(this)
+//        qrView.setImageResource(R.mipmap.fatie)
+//        item?.setActionView(qrView)
+//        qrView?.post { showGuideView(qrView) }
+//        val actionView = MenuItemCompat.getActionView(item)
+//        actionView?.post { showGuideView(actionView) }
         return super.onPrepareOptionsMenu(menu)
     }
 
@@ -90,7 +95,7 @@ class TXActivity : BaseVPActivity() {
 
             override fun onDismiss() {
 //                showGuideView2()
-                FaTieTXActivity.goHere(0)
+//                FaTieTXActivity.goHere(0)
             }
         })
 

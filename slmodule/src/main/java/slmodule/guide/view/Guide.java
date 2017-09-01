@@ -46,7 +46,7 @@ public class Guide implements View.OnKeyListener, View.OnClickListener {
 
   /**
    * 显示该遮罩, <br>
-   * 外部借助{@link com.blog.www.guideview.GuideBuilder}
+   * 外部借助{@link GuideBuilder}
    * 创建好一个Guide实例后，使用该实例调用本函数遮罩才会显示
    *
    * @param activity 目标Activity

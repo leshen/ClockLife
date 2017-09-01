@@ -24,6 +24,7 @@
             android:fitsSystemWindows="true"
             android:clipToPadding="true"
             android:background="?attr/colorPrimary"
+            app:theme="@style/AppTheme"
             app:popupTheme="@style/AppTheme.PopupOverlay">
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
