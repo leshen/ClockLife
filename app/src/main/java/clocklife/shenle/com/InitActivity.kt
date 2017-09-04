@@ -2,6 +2,7 @@ package clocklife.shenle.com
 
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import clocklife.shenle.com.base.BaseAppActivity
 import clocklife.shenle.com.base.data.BaseAppState
 import clocklife.shenle.com.db.bean.AppUserInfo
 import clocklife.shenle.com.db.bean.AppUserInfo_Table
@@ -13,10 +14,11 @@ import slmodule.shenle.com.utils.UIUtils
 import java.util.concurrent.TimeUnit
 
 
-class InitActivity : BaseActivity() {
+class InitActivity : BaseAppActivity() {
     override fun initToolBar(): Toolbar? {
         return null
     }
+
 
     override fun getRootView(): Int {
         return R.layout.activity_init

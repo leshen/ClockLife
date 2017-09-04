@@ -496,4 +496,29 @@ object UIUtils {
         }
         return null
     }
+    //通过反射获取状态栏高度，默认25dp
+//    fun  getStatusBarHeight(context:Context):Int {
+//        var statusBarHeight = dip2px(25)
+//        try {
+//            var clazz = Class.forName("com.android.internal.R\$dimen")
+//            var o = clazz.newInstance()
+//            var height = Integer.parseInt(clazz.getField("status_bar_height")
+//                    .get(o).toString())
+//            statusBarHeight = context.getResources().getDimensionPixelSize(height)
+//        } catch (e:Exception) {
+//            e.printStackTrace()
+//        }
+//        return statusBarHeight
+//    }
+    //通过反射获取状态栏高度，默认25dp
+    fun  getStatusBarHeight(context:Context):Int {
+        var statusBarHeight = -1
+//获取status_bar_height资源的ID
+        val resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            //根据资源ID获取响应的尺寸值
+            statusBarHeight = context.getResources().getDimensionPixelSize(resourceId)
+        }
+        return statusBarHeight
+    }
 }

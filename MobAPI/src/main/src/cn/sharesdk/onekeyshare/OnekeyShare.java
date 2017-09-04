@@ -36,7 +36,7 @@ public class OnekeyShare {
 
 	public OnekeyShare() {
 		params = new HashMap<String, Object>();
-		params.put("customers", new ArrayList<CustomerLogo>());
+		params.put("customers", new ArrayList<cn.sharesdk.onekeyshare.CustomerLogo>());
 		params.put("hiddenPlatforms", new HashMap<String, String>());
 	}
 
@@ -163,22 +163,22 @@ public class OnekeyShare {
 	}
 
 	/** 设置用于分享过程中，根据不同平台自定义分享内容的回调 */
-	public void setShareContentCustomizeCallback(ShareContentCustomizeCallback callback) {
+	public void setShareContentCustomizeCallback(cn.sharesdk.onekeyshare.ShareContentCustomizeCallback callback) {
 		params.put("customizeCallback", callback);
 	}
 
 	/** 自定义不同平台分享不同内容的回调 */
-	public ShareContentCustomizeCallback getShareContentCustomizeCallback() {
+	public cn.sharesdk.onekeyshare.ShareContentCustomizeCallback getShareContentCustomizeCallback() {
 		return ResHelper.forceCast(params.get("customizeCallback"));
 	}
 
 	/** 设置自己图标和点击事件，可以重复调用添加多次 */
 	public void setCustomerLogo(Bitmap logo, String label, OnClickListener ocl) {
-		CustomerLogo cl = new CustomerLogo();
+		cn.sharesdk.onekeyshare.CustomerLogo cl = new cn.sharesdk.onekeyshare.CustomerLogo();
 		cl.logo = logo;
 		cl.label = label;
 		cl.listener = ocl;
-		ArrayList<CustomerLogo> customers = ResHelper.forceCast(params.get("customers"));
+		ArrayList<cn.sharesdk.onekeyshare.CustomerLogo> customers = ResHelper.forceCast(params.get("customers"));
 		customers.add(cl);
 	}
 
@@ -220,7 +220,7 @@ public class OnekeyShare {
 	}
 
 	/** 设置分享界面的样式，目前只有一种，不需要设置 */
-	public void setTheme(OnekeyShareTheme theme) {
+	public void setTheme(cn.sharesdk.onekeyshare.OnekeyShareTheme theme) {
 		params.put("theme", theme.getValue());
 	}
 
@@ -240,16 +240,16 @@ public class OnekeyShare {
 		try {
 			iTheme = ResHelper.parseInt(String.valueOf(shareParamsMap.remove("theme")));
 		} catch (Throwable t) {}
-		OnekeyShareTheme theme = OnekeyShareTheme.fromValue(iTheme);
-		OnekeyShareThemeImpl themeImpl = theme.getImpl();
+		cn.sharesdk.onekeyshare.OnekeyShareTheme theme = cn.sharesdk.onekeyshare.OnekeyShareTheme.fromValue(iTheme);
+		cn.sharesdk.onekeyshare.OnekeyShareThemeImpl themeImpl = theme.getImpl();
 
 		themeImpl.setShareParamsMap(shareParamsMap);
 		themeImpl.setDialogMode(shareParamsMap.containsKey("dialogMode") ? ((Boolean) shareParamsMap.remove("dialogMode")) : false);
 		themeImpl.setSilent(shareParamsMap.containsKey("silent") ? ((Boolean) shareParamsMap.remove("silent")) : false);
-		themeImpl.setCustomerLogos((ArrayList<CustomerLogo>) shareParamsMap.remove("customers"));
+		themeImpl.setCustomerLogos((ArrayList<cn.sharesdk.onekeyshare.CustomerLogo>) shareParamsMap.remove("customers"));
 		themeImpl.setHiddenPlatforms((HashMap<String, String>) shareParamsMap.remove("hiddenPlatforms"));
 		themeImpl.setPlatformActionListener((PlatformActionListener) shareParamsMap.remove("callback"));
-		themeImpl.setShareContentCustomizeCallback((ShareContentCustomizeCallback) shareParamsMap.remove("customizeCallback"));
+		themeImpl.setShareContentCustomizeCallback((cn.sharesdk.onekeyshare.ShareContentCustomizeCallback) shareParamsMap.remove("customizeCallback"));
 		if (shareParamsMap.containsKey("disableSSO") ? ((Boolean) shareParamsMap.remove("disableSSO")) : false) {
 			themeImpl.disableSSO();
 		}

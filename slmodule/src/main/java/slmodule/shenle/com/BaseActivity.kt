@@ -21,7 +21,8 @@ import android.view.WindowManager
 import android.os.Build
 import com.readystatesoftware.systembartint.SystemBarTintManager.SystemBarConfig
 import android.view.ViewGroup
-
+import slmodule.shenle.com.db.DBHelper
+import slmodule.shenle.com.utils.UIUtils
 
 
 /**
@@ -33,6 +34,7 @@ abstract class BaseActivity : RxAppCompatActivity(), SwipeBackHelper.SlideBackMa
     open fun onTest(){
 
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        dialog = LoadingDialog(this,R.style.LoadingDialog)
@@ -65,7 +67,12 @@ abstract class BaseActivity : RxAppCompatActivity(), SwipeBackHelper.SlideBackMa
             // enable navigation bar tint 激活导航栏
 //            tintManager.setNavigationBarTintEnabled(true)
             val config = tintManager.config
-            toolBar.setPadding(0, config.getPixelInsetTop(true), config.pixelInsetRight, config.pixelInsetBottom)
+//            if (editSettingToolBar()){
+//
+//            }else {
+//                toolBar.setPadding(0, config.getPixelInsetTop(true), config.pixelInsetRight, config.pixelInsetBottom)
+//            }
+//            toolbar.setPadding(0, UIUtils.getStatusBarHeight(this), 0, 0);
             //设置系统栏设置颜色
 //            tintManager.setTintColor(R.color.text_color_9);
             //Apply the specified drawable or color resource to the system navigation bar.
@@ -75,7 +82,6 @@ abstract class BaseActivity : RxAppCompatActivity(), SwipeBackHelper.SlideBackMa
             tintManager.setStatusBarTintResource(setSystemBarTintColor(tintManager))
         }
     }
-
     open fun setSystemBarTintColor(tintManager: SystemBarTintManager): Int {
         return R.color.text_color_2
     }
@@ -181,4 +187,5 @@ abstract class BaseActivity : RxAppCompatActivity(), SwipeBackHelper.SlideBackMa
         }
         super.finish()
     }
+
 }

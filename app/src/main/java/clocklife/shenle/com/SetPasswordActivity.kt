@@ -2,6 +2,7 @@ package clocklife.shenle.com
 
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import clocklife.shenle.com.base.BaseAppActivity
 import clocklife.shenle.com.db.bean.AppUserInfo
 import clocklife.shenle.com.db.bean.AppUserInfo_Table
 import cn.jpush.im.android.api.JMessageClient
@@ -18,7 +19,7 @@ import slmodule.shenle.com.utils.UIUtils
 import java.util.regex.Pattern
 
 
-class SetPasswordActivity : BaseActivity() {
+class SetPasswordActivity : BaseAppActivity() {
     override fun initToolBar(): Toolbar? {
         toolbar.setTitle("设置密码")
         return toolbar

@@ -3,6 +3,7 @@ package clocklife.shenle.com
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.View
+import clocklife.shenle.com.base.BaseAppActivity
 import cn.smssdk.EventHandler
 import cn.smssdk.SMSSDK
 import io.reactivex.Observable
@@ -13,7 +14,7 @@ import slmodule.shenle.com.utils.SmsHelper
 import slmodule.shenle.com.utils.UIUtils
 
 
-class RegisterActivity : BaseActivity() {
+class RegisterActivity : BaseAppActivity() {
     override fun initToolBar(): Toolbar? {
         return toolbar
     }

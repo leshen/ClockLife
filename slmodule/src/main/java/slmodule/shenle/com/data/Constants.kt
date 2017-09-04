@@ -5,7 +5,7 @@ package slmodule.shenle.com.data
  */
 class Constants {
     companion object {
-//        val isTest = true
-        val isTest = false
+        val isTest = true
+//        val isTest = false
     }
 }

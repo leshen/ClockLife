@@ -4,20 +4,24 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.View
 import clocklife.shenle.com.R
+import clocklife.shenle.com.base.BaseAppActivity
 import clocklife.shenle.com.base.data.BaseAppState
 import clocklife.shenle.com.base.message.TXMessage
+import clocklife.shenle.com.db.bean.AppUserInfo
+import clocklife.shenle.com.db.bean.AppUserInfo_Table
 import clocklife.shenle.com.help.MyUtils
 import cn.jpush.im.android.api.JMessageClient
-import cn.jpush.im.android.api.content.MessageContent
 import cn.jpush.im.android.api.model.Conversation
 import cn.jpush.im.android.api.options.MessageSendingOptions
 import cn.jpush.im.api.BasicCallback
 import com.readystatesoftware.systembartint.SystemBarTintManager
 import kotlinx.android.synthetic.main.base_toolbar.*
 import slmodule.shenle.com.BaseActivity
+import slmodule.shenle.com.db.DBHelper
+import slmodule.shenle.com.utils.TimeUtil
 import slmodule.shenle.com.utils.UIUtils
 
-class FaTieTXActivity : BaseActivity() {
+class FaTieTXActivity : BaseAppActivity() {
     override fun initToolBar(): Toolbar? {
         toolbar?.title = "提醒"
         return toolbar
@@ -48,6 +52,8 @@ class FaTieTXActivity : BaseActivity() {
 
     override fun onTest() {
         phone = "18547602110"
+        content = "hahaha"
+        clockTime = TimeUtil.getStringToDate("2017-09-04 12:39",TimeUtil.PATTERN_ALL_LESS)
     }
 
     fun onSubmit(view: View) {
@@ -56,7 +62,11 @@ class FaTieTXActivity : BaseActivity() {
             val msg = TXMessage()
             msg.setStringExtra("content", content)
             msg.setNumberExtra("time", clockTime)
-            val createSendMessage = Conversation.createSingleConversation("sl${phone}").createSendMessage(msg, "")
+            var conv = JMessageClient.getSingleConversation("sl${phone}")
+            if (null == conv) {
+                conv = Conversation.createSingleConversation("sl${phone}")
+            }
+            val createSendMessage = conv.createSendMessage(msg)
             createSendMessage.setOnSendCompleteCallback(object : BasicCallback() {
                 override fun gotResult(responseCode: Int, responseDesc: String?) {
                     if (responseCode == 0) {
@@ -69,7 +79,7 @@ class FaTieTXActivity : BaseActivity() {
                 }
             })
             var options = MessageSendingOptions()
-            options.setRetainOffline(false)
+            options.setRetainOffline(true)
             JMessageClient.sendMessage(createSendMessage, options)//使用自定义的控制参数发送消息
         }
     }

@@ -7,6 +7,9 @@ import android.view.Menu
 import android.view.View
 import android.widget.ImageView
 import clocklife.shenle.com.R
+import clocklife.shenle.com.base.data.BaseAppState
+import clocklife.shenle.com.db.bean.AppUserInfo
+import clocklife.shenle.com.db.bean.AppUserInfo_Table
 import clocklife.shenle.com.one.fragment.MySendTxFragment
 import clocklife.shenle.com.one.fragment.MyTxFragment
 import clocklife.shenle.com.one.fragment.TXSelfFragment
@@ -16,6 +19,7 @@ import slmodule.guide.view.Guide
 import slmodule.guide.view.GuideBuilder
 import slmodule.shenle.com.BaseFragment
 import slmodule.shenle.com.BaseVPActivity
+import slmodule.shenle.com.db.DBHelper
 import slmodule.shenle.com.utils.UIUtils
 
 
@@ -31,6 +35,11 @@ import slmodule.shenle.com.utils.UIUtils
  * Created by shenle on 2017/5/25.
  */
 class TXActivity : BaseVPActivity() {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true))
+        BaseAppState.setData(appUserInfo)
+    }
     override fun getListFragment(): List<BaseFragment>? {
         return listOf(TXSelfFragment.getInstance(),MyTxFragment.getInstance(), MySendTxFragment.getInstance())
     }

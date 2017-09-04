@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:clipToPadding="true"
+    android:clipToPadding="false"
     tools:context="slmodule.shenle.com.BaseMainActivity">
 
     <include layout="@layout/base_toolbar"/>

@@ -3,6 +3,7 @@ package clocklife.shenle.com
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
@@ -31,6 +32,11 @@ import slmodule.shenle.com.utils.BitmapUtils
 
 
 class MainActivity : BaseMainActivity() {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true))
+        BaseAppState.setData(appUserInfo)
+    }
     override fun initToolBar(): Toolbar? {
         toolbar?.setTitle("首页")
         return toolbar

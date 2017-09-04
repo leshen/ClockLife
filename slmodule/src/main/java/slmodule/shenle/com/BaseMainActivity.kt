@@ -1,7 +1,6 @@
 package slmodule.shenle.com
 
 import android.animation.Animator
-import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar

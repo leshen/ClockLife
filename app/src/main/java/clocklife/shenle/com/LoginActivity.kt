@@ -3,6 +3,7 @@ package clocklife.shenle.com
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import clocklife.shenle.com.base.BaseAppActivity
 import clocklife.shenle.com.base.data.BaseAppState
 import clocklife.shenle.com.db.bean.AppUserInfo
 import clocklife.shenle.com.db.bean.AppUserInfo_Table
@@ -21,7 +22,7 @@ import java.util.regex.Pattern
 /**
  * 登录
  */
-class LoginActivity : BaseActivity() {
+class LoginActivity : BaseAppActivity() {
     override fun initToolBar(): Toolbar? {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(UIUtils.getColor(R.color.bg_20))

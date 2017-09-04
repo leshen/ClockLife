@@ -260,7 +260,8 @@
         <activity android:name=".SetPasswordActivity"/>
         <activity android:name=".one.TXActivity">
         </activity>
-        <activity android:name=".one.FaTieTXActivity" />
+        <activity android:name=".one.FaTieTXActivity"
+                  android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

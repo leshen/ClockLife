@@ -6,25 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:clipToPadding="true"
+    android:clipToPadding="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:clipToPadding="true"
+        android:clipToPadding="false"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
             android:fitsSystemWindows="true"
-            android:clipToPadding="true"
-            android:background="?attr/colorPrimary"
-            app:theme="@style/AppTheme"
+            android:clipToPadding="false"
+            android:minHeight="?attr/actionBarSize"
+            android:background="@color/text_color_5"
+            app:navigationIcon="@drawable/black_back"
+            app:titleTextColor="@color/text_color_1"
+            app:titleTextAppearance="@dimen/text_size_32"
             app:popupTheme="@style/AppTheme.PopupOverlay">
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
