@@ -158,7 +158,7 @@ class MyAppWidgetProvider : AppWidgetProvider() {
         // 按钮信息
         private val BUTTON_SHOW = 1
         // 启动ExampleAppWidgetService服务对应的action
-        val EXAMPLE_SERVICE_INTENT = Intent("android.appwidget.action.EXAMPLE_APP_WIDGET_SERVICE")
+        val EXAMPLE_SERVICE_INTENT = Intent("android.appwidget.action.MY_APP_WIDGET_SERVICE")
         // TODO 图片数组
         private val ARR_IMAGES = intArrayOf(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher,R.mipmap.fatie, R.mipmap.login, R.mipmap.login_bg, R.mipmap.widget_preview)
     }

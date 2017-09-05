@@ -254,7 +254,7 @@
 
         <service android:name=".base.receiver.MyAppWidgetService" >
             <intent-filter>
-                <action android:name="android.appwidget.action.EXAMPLE_APP_WIDGET_SERVICE" />
+                <action android:name="android.appwidget.action.MY_APP_WIDGET_SERVICE" />
             </intent-filter>
         </service>
 
