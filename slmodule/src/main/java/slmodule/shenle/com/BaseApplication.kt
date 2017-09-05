@@ -108,13 +108,13 @@ open class BaseApplication : MultiDexApplication() {
     }
     override fun onCreate() {
         super.onCreate()
+        registerActivityLifecycleCallbacks(ActivityLifecycleHelper.build());
         RePlugin.App.onCreate();
         application = this
         mainThread = Thread.currentThread()
         mainThreadId = android.os.Process.myTid()
         mainThreadHandler = Handler()
         mainLoopler = mainLooper
-        registerActivityLifecycleCallbacks(ActivityLifecycleHelper.build());
         initDB()
         initTongJi()
         initLib()

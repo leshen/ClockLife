@@ -1,6 +1,8 @@
 package clocklife.shenle.com.base.receiver
 
 import android.content.Context
+import clocklife.shenle.com.base.dao.ClockDao
+import clocklife.shenle.com.base.message.TXMessage
 import cn.jpush.im.android.api.JMessageClient
 import cn.jpush.im.android.api.content.*
 import cn.jpush.im.android.api.enums.ContentType
@@ -8,6 +10,12 @@ import cn.jpush.im.android.api.enums.ConversationType
 import cn.jpush.im.android.api.event.MessageEvent
 import cn.jpush.im.android.api.event.NotificationClickEvent
 import cn.jpush.im.android.api.model.Conversation
+import slmodule.shenle.com.utils.UIUtils
+import cn.jpush.im.android.api.JMessageClient.getMyInfo
+import cn.jpush.im.android.api.model.UserInfo
+import cn.jpush.im.android.api.event.LoginStateChangeEvent
+
+
 
 
 /**
@@ -79,10 +87,14 @@ class NotificationClickEventReceiver {
             }
             ContentType.custom -> {
                 //处理自定义消息
-                var customContent = msg.getContent() as CustomContent
-                customContent.getNumberValue("custom_num") //获取自定义的值
-                customContent.getBooleanValue("custom_boolean")
-                customContent.getStringValue("custom_string")
+                var customContent = msg.getContent()
+                if (customContent is CustomContent){//消息提醒测试
+                    val time = customContent.getNumberExtra("time").toLong()
+                    val type = customContent.getNumberExtra("type")
+                    val content = customContent.getStringExtra("content")
+                    ClockDao.setAlarmTime(UIUtils.context,time,content,""+type)
+                }
+                UIUtils.showToastSafe(customContent.toJson())
             }
             ContentType.eventNotification -> {
                 //处理事件提醒消息
@@ -103,5 +115,23 @@ class NotificationClickEventReceiver {
                 }
             }
         }
+    }
+
+    /**
+     * 用户登录状态变更事件
+     */
+    fun onEvent(event: LoginStateChangeEvent) {
+        val reason = event.reason//获取变更的原因
+        val myInfo = event.myInfo//获取当前被登出账号的信息
+        when (reason) {
+            LoginStateChangeEvent.Reason.user_password_change -> {
+            }
+            LoginStateChangeEvent.Reason.user_logout -> {
+            }
+            LoginStateChangeEvent.Reason.user_deleted -> {
+            }
+        }//用户密码在服务器端被修改
+        //用户换设备登录
+        //用户被删除
     }
 }

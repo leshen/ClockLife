@@ -233,6 +233,32 @@
         </receiver>
         <!-- 讯飞 -->
 
+        <!--闹钟定时任务-->
+        <receiver android:name=".base.receiver.AlarmReceiver"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.alarm.clocklife.action" />
+            </intent-filter>
+        </receiver>
+        <!--闹钟定时任务-->
+
+        <!-- 声明widget对应的AppWidgetProvider -->
+        <receiver android:name=".base.dao.MyAppWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.clocklife.widget.UPDATE_ALL"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                       android:resource="@xml/example_appwidget_info" />
+        </receiver>
+
+        <service android:name=".base.receiver.MyAppWidgetService" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.EXAMPLE_APP_WIDGET_SERVICE" />
+            </intent-filter>
+        </service>
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

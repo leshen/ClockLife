@@ -7,7 +7,10 @@ import clocklife.shenle.com.base.data.BaseAppState
 import clocklife.shenle.com.db.bean.AppUserInfo
 import clocklife.shenle.com.db.bean.AppUserInfo_Table
 import clocklife.shenle.com.help.MyUtils
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.api.BasicCallback
 import io.reactivex.Observable
+import kotlinx.android.synthetic.main.activity_login.*
 import slmodule.shenle.com.BaseActivity
 import slmodule.shenle.com.db.DBHelper
 import slmodule.shenle.com.utils.UIUtils
@@ -25,7 +28,7 @@ class InitActivity : BaseAppActivity() {
     }
 
     override fun initOnCreate(savedInstanceState: Bundle?) {
-        var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true))
+        val appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true))
         if (appUserInfo != null) {
             BaseAppState.userUid = appUserInfo.uid
             BaseAppState.userName = appUserInfo.name
@@ -33,7 +36,41 @@ class InitActivity : BaseAppActivity() {
             BaseAppState.userPhoto = appUserInfo.photo
             Observable.timer(2, TimeUnit.SECONDS).compose(this.bindToLifecycle()).subscribe {
                 if (MyUtils.isLogin()) {
-                    MainActivity.goHere()
+                    JMessageClient.login("sl"+appUserInfo.phone, appUserInfo.password, object : BasicCallback(){
+                        override fun gotResult(code: Int, p1: String?) {
+                            if (code==0){
+                                //登录成功
+                                MainActivity.goHere()
+                                UIUtils.finishDelay(2,this@InitActivity)
+                            }else if(code==801003){
+                                JMessageClient.register("sl"+appUserInfo.phone, appUserInfo.password, object : BasicCallback(){
+                                    override fun gotResult(code: Int, p1: String?) {
+                                        if (code==0){
+                                            //注册成功
+                                            JMessageClient.login("sl"+appUserInfo.phone, appUserInfo.password, object : BasicCallback() {
+                                                override fun gotResult(code: Int, p1: String?) {
+                                                    if (code == 0) {
+                                                        //登录成功
+                                                    }
+                                                    MainActivity.goHere()
+                                                    UIUtils.finishDelay(2, this@InitActivity)
+                                                    UIUtils.showToastSafe("code=${code}"+p1)
+                                                }
+                                            })
+                                        }else{
+                                            MainActivity.goHere()
+                                            UIUtils.finishDelay(2, this@InitActivity)
+                                            UIUtils.showToastSafe("code=${code}"+p1)
+                                        }
+
+                                    }})
+                            }else{
+                                MainActivity.goHere()
+                                UIUtils.finishDelay(2,this@InitActivity)
+                            }
+                            UIUtils.showToastSafe("code=${code}"+p1)
+                        }
+                    })
                 }
                 UIUtils.finishDelay(1, this)
             }

@@ -1,6 +1,7 @@
 package clocklife.shenle.com.one
 
 import android.os.Bundle
+import android.os.SystemClock
 import android.support.v7.widget.Toolbar
 import android.view.View
 import clocklife.shenle.com.R
@@ -51,17 +52,21 @@ class FaTieTXActivity : BaseAppActivity() {
     var clockTime: Long = 0//提醒时间
 
     override fun onTest() {
-        phone = "18547602110"
+//        phone = "18547602110"
+        phone = "15810111946"
         content = "hahaha"
-        clockTime = TimeUtil.getStringToDate("2017-09-04 12:39",TimeUtil.PATTERN_ALL_LESS)
+//        clockTime = TimeUtil.getStringToDate("2017-09-05 16:15",TimeUtil.PATTERN_ALL_LESS)
+        clockTime = System.currentTimeMillis()+1000*5
+//        clockTime = SystemClock.elapsedRealtime()+1000*10
     }
 
     fun onSubmit(view: View) {
         if (MyUtils.isLogin()) {
             //发布提醒
             val msg = TXMessage()
-            msg.setStringExtra("content", content)
-            msg.setNumberExtra("time", clockTime)
+            msg.setContent(content!!)
+            msg.setTime(clockTime!!)
+            msg.setType(TXMessage.CLOCK_SELF)
             var conv = JMessageClient.getSingleConversation("sl${phone}")
             if (null == conv) {
                 conv = Conversation.createSingleConversation("sl${phone}")
