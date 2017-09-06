@@ -26,16 +26,18 @@ import com.qihoo360.replugin.RePluginEventCallbacks.InstallResult
 import com.qihoo360.replugin.RePluginEventCallbacks
 import android.content.Intent
 import android.util.Log
+import android.view.WindowManager
 import com.qihoo360.replugin.RePluginCallbacks
-
-
-
-
 
 
 open class BaseApplication : MultiDexApplication() {
     var isDayOrNight = false//是否是夜间模式
     private var isFirstLaunch: Boolean = true
+    private var wmParams = WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_TOAST)//移动悬浮窗
+
+    fun getMywmParams(): WindowManager.LayoutParams {
+        return wmParams
+    }
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
@@ -49,7 +51,7 @@ open class BaseApplication : MultiDexApplication() {
             // 非首次启动
             MultiDex.install(base)
         }
-        RePlugin.App.attachBaseContext(this,createConfig())
+        RePlugin.App.attachBaseContext(this, createConfig())
     }
 
     /**
@@ -106,6 +108,7 @@ open class BaseApplication : MultiDexApplication() {
             super.onStartActivityCompleted(plugin, activity, result)
         }
     }
+
     override fun onCreate() {
         super.onCreate()
         registerActivityLifecycleCallbacks(ActivityLifecycleHelper.build());
@@ -139,6 +142,7 @@ open class BaseApplication : MultiDexApplication() {
         /* Not need to be called if your application's minSdkVersion > = 14 */
         RePlugin.App.onConfigurationChanged(newConfig);
     }
+
     /**
      * mob
      */
@@ -171,7 +175,7 @@ open class BaseApplication : MultiDexApplication() {
      * 及时通讯lib
      */
     open fun initLib() {
-        JMessageClient.init(applicationContext,true)
+        JMessageClient.init(applicationContext, true)
 //        JMessageClient.setDebugMode(true)
     }
 

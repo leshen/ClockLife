@@ -9,6 +9,8 @@
     <!-- Required -->
     <uses-permission android:name="clocklife.shenle.com.permission.JPUSH_MESSAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
+    <!-- 悬浮窗的权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -90,6 +92,9 @@
             <!--android:value="4ab8b4dbfd37a5a2e60e3a57"-->
             <!--tools:replace="android:value" />-->
         <!--极光im-->
+
+        <!--悬浮窗-->
+        <service android:name="slmodule.shenle.com.helper.FloatingService"/>
     </application>
 
 </manifest>

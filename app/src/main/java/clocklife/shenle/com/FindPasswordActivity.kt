@@ -8,7 +8,7 @@ import com.mob.ums.OperationCallback
 import com.mob.ums.UMSSDK
 import kotlinx.android.synthetic.main.activity_find_password.*
 import slmodule.shenle.com.BaseActivity
-import slmodule.shenle.com.db.DBHelper
+import slmodule.shenle.com.helper.DBHelper
 import slmodule.shenle.com.utils.RxBus
 import slmodule.shenle.com.utils.UIUtils
 

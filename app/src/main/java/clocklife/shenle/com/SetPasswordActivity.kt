@@ -12,8 +12,7 @@ import com.mob.ums.UMSSDK
 import com.mob.ums.User
 import kotlinx.android.synthetic.main.activity_setpassword.*
 import kotlinx.android.synthetic.main.base_toolbar.*
-import slmodule.shenle.com.BaseActivity
-import slmodule.shenle.com.db.DBHelper
+import slmodule.shenle.com.helper.DBHelper
 import slmodule.shenle.com.utils.RxBus
 import slmodule.shenle.com.utils.UIUtils
 import java.util.regex.Pattern

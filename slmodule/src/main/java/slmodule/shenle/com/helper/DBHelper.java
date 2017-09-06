@@ -1,6 +1,5 @@
-package slmodule.shenle.com.db;
+package slmodule.shenle.com.helper;
 
-import com.iflytek.cloud.thirdparty.T;
 import com.raizlabs.android.dbflow.sql.language.SQLOperator;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;

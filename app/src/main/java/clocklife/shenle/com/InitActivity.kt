@@ -10,9 +10,7 @@ import clocklife.shenle.com.help.MyUtils
 import cn.jpush.im.android.api.JMessageClient
 import cn.jpush.im.api.BasicCallback
 import io.reactivex.Observable
-import kotlinx.android.synthetic.main.activity_login.*
-import slmodule.shenle.com.BaseActivity
-import slmodule.shenle.com.db.DBHelper
+import slmodule.shenle.com.helper.DBHelper
 import slmodule.shenle.com.utils.UIUtils
 import java.util.concurrent.TimeUnit
 

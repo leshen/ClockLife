@@ -44,7 +44,7 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
                     .setAction("Action", null).show()
         }
         //关闭手势滑动
-//        drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)

@@ -34,6 +34,8 @@
     <uses-permission android:name="android.permission.READ_SMS"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
+    <!-- 悬浮窗的权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <permission
         android:name="clocklife.shenle.com.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature"/>

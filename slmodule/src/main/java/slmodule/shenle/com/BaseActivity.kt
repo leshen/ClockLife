@@ -12,17 +12,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.iflytek.sunflower.FlowerCollector
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
-import kotlinx.android.synthetic.main.activity_base_vp.*
 import slmodule.shenle.com.data.Constants
 import slmodule.shenle.com.dialog.LoadingDialog
 import slmodule.shenle.com.utils.SwipeBackHelper
 import com.readystatesoftware.systembartint.SystemBarTintManager
 import android.view.WindowManager
 import android.os.Build
-import com.readystatesoftware.systembartint.SystemBarTintManager.SystemBarConfig
 import android.view.ViewGroup
-import slmodule.shenle.com.db.DBHelper
-import slmodule.shenle.com.utils.UIUtils
 
 
 /**

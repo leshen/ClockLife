@@ -1,11 +1,9 @@
 package clocklife.shenle.com.one
 
 import android.os.Bundle
-import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.View
-import android.widget.ImageView
 import clocklife.shenle.com.R
 import clocklife.shenle.com.base.data.BaseAppState
 import clocklife.shenle.com.db.bean.AppUserInfo
@@ -19,7 +17,7 @@ import slmodule.guide.view.Guide
 import slmodule.guide.view.GuideBuilder
 import slmodule.shenle.com.BaseFragment
 import slmodule.shenle.com.BaseVPActivity
-import slmodule.shenle.com.db.DBHelper
+import slmodule.shenle.com.helper.DBHelper
 import slmodule.shenle.com.utils.UIUtils
 
 

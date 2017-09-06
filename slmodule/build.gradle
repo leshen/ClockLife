@@ -64,7 +64,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-        compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-vector-drawable:25.3.1'
@@ -91,7 +91,6 @@ dependencies {
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.4'
     //360插件化
     compile 'com.qihoo360.replugin:replugin-host-lib:2.2.0'
-
 }
 repositories {
     //    mavenCentral()
