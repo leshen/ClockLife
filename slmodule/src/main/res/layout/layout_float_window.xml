@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.ff.ffloater.floatwindow.FakeVideoView
+    <slmodule.shenle.com.floatwindow.FakeVideoView
         android:id="@+id/video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent"/>
+        android:background="@color/bg_1"/>
 
     <ImageView
         android:id="@+id/close"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="top|end"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/selector_icon_close"/>
 
 </FrameLayout>

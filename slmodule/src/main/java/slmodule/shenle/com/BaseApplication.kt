@@ -1,44 +1,30 @@
 package slmodule.shenle.com
 
-import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Handler
 import android.os.Looper
 import android.os.Process
-import android.support.multidex.MultiDexApplication
-import com.mob.MobSDK
-
-import com.raizlabs.android.dbflow.config.FlowManager
-
-import java.util.ArrayList
-import java.util.LinkedList
-
-import slmodule.shenle.com.utils.UIUtils
-import zyt.xunfeilib.XunFeiHelper
 import android.support.multidex.MultiDex
+import android.support.multidex.MultiDexApplication
+import android.util.Log
 import cn.jpush.im.android.api.JMessageClient
 import com.aitangba.swipeback.ActivityLifecycleHelper
+import com.mob.MobSDK
 import com.qihoo360.replugin.RePlugin
-import com.qihoo360.replugin.RePluginConfig
-import com.qihoo360.replugin.RePluginEventCallbacks.InstallResult
-import com.qihoo360.replugin.RePluginEventCallbacks
-import android.content.Intent
-import android.util.Log
-import android.view.WindowManager
 import com.qihoo360.replugin.RePluginCallbacks
+import com.qihoo360.replugin.RePluginConfig
+import com.qihoo360.replugin.RePluginEventCallbacks
+import com.raizlabs.android.dbflow.config.FlowManager
+import slmodule.shenle.com.utils.UIUtils
+import zyt.xunfeilib.XunFeiHelper
 
 
 open class BaseApplication : MultiDexApplication() {
     var isDayOrNight = false//是否是夜间模式
     private var isFirstLaunch: Boolean = true
-    private var wmParams = WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_TOAST)//移动悬浮窗
-
-    fun getMywmParams(): WindowManager.LayoutParams {
-        return wmParams
-    }
-
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
         if (isFirstLaunch) {

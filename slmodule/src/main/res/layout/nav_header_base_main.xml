@@ -20,7 +20,7 @@
             android:layout_width="46dp"
             android:layout_height="46dp"
             android:scaleType="fitXY"
-            android:src="@drawable/cmssdk_default_comment_icon"
+            android:src="@mipmap/ic_launcher"
         />
 
         <TextView

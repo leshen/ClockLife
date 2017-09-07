@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CMSSDKGUI/CMSSDKGUI.iml" filepath="$PROJECT_DIR$/CMSSDKGUI/CMSSDKGUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/ClockLife.iml" filepath="$PROJECT_DIR$/ClockLife.iml" />
       <module fileurl="file://$PROJECT_DIR$/MobAPI/MobAPI.iml" filepath="$PROJECT_DIR$/MobAPI/MobAPI.iml" />
       <module fileurl="file://$PROJECT_DIR$/XunFeiLib/XunFeiLib.iml" filepath="$PROJECT_DIR$/XunFeiLib/XunFeiLib.iml" />
