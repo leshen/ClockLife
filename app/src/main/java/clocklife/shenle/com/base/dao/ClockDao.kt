@@ -16,7 +16,7 @@ import cn.jpush.im.android.api.model.Conversation
 class ClockDao {
     companion object {
         val ACTION_1 = "android.alarm.clocklife.action"
-        fun setAlarmTime(context: Context, triggerAtMillis: Long,content: String,type:String) {
+        fun setAlarmTime(context: Context, triggerAtMillis: Long,title:String,content: String,type:String) {
             val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val intent = Intent(context,AlarmReceiver::class.java)
             intent.setAction(ACTION_1);
@@ -25,6 +25,9 @@ class ClockDao {
                     .parse("ClockLife://" + context.getApplicationInfo().packageName)
                     .buildUpon()
                     .appendPath("clockevent")
+                    .appendQueryParameter(
+                            "title",
+                            title)
                     .appendQueryParameter(
                             "content",
                             content)

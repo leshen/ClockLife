@@ -91,8 +91,9 @@ class NotificationClickEventReceiver {
                 if (customContent is CustomContent){//消息提醒测试
                     val time = customContent.getNumberExtra("time").toLong()
                     val type = customContent.getNumberExtra("type")
+                    val title = customContent.getStringExtra("title")
                     val content = customContent.getStringExtra("content")
-                    ClockDao.setAlarmTime(UIUtils.context,time,content,""+type)
+                    ClockDao.setAlarmTime(UIUtils.context,time,title,content,""+type)
                 }
                 UIUtils.showToastSafe(customContent.toJson())
             }

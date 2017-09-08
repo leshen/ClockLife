@@ -81,6 +81,10 @@ public class FloatWindowManager {
         isAddToWindow = false;
     }
 
+    public View getmSmallWindow() {
+        return mSmallWindow;
+    }
+
     private void createSmallWindow() {
         mSmallWindow = LayoutInflater.from(mContext).inflate(R.layout.layout_float_window, null);
         FakeVideoView fakeVideoView = (FakeVideoView) mSmallWindow.findViewById(R.id.video);

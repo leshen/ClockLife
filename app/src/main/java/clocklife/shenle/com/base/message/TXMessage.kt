@@ -22,6 +22,12 @@ class TXMessage : CustomContent() {
     fun getContent():String{
         return getStringValue("content")
     }
+    fun setTitle(content :String){
+        setStringExtra("title",content)
+    }
+    fun getTitle():String{
+        return getStringValue("title")
+    }
     fun setType(type :Int){
         setNumberExtra("type",type)
     }

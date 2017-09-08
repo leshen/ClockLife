@@ -382,7 +382,7 @@ object UIUtils {
 
 
     fun isEmpty(s: String?): Boolean {
-        return s == null || s.trim { it <= ' ' }.isEmpty() || s == "null"
+        return s == null || s.trim().isEmpty() || s == "null"
     }
 
     /**
