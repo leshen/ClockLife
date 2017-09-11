@@ -31,22 +31,49 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
     override fun supportSlideBack(): Boolean {
         return false
     }
-    override fun getRootView(): Int{
+
+    override fun getRootView(): Int {
 //        val enabledTranslucentNavigation = getSharedPreferences("shared", Context.MODE_PRIVATE)
 //                .getBoolean("translucentNavigation", false)
 //        setTheme(if (enabledTranslucentNavigation) R.style.AppTheme_TranslucentNavigation else R.style.AppTheme)
         return R.layout.activity_base_main
     }
+
     override fun initOnCreate(savedInstanceState: Bundle?) {
 //        setSupportActionBar(toolbar)
-        fab.setOnClickListener{
+        fab.setOnClickListener {
             Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
         //关闭手势滑动
         drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        drawer_layout.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerStateChanged(newState: Int) {
+            }
+
+            override fun onDrawerSlide(drawerView: View?, slideOffset: Float) {
+
+            }
+
+            override fun onDrawerClosed(drawerView: View?) {
+                drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            }
+
+            override fun onDrawerOpened(drawerView: View?) {
+                drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            }
+
+        })
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        toggle.setDrawerIndicatorEnabled(false)
+        toggle.setToolbarNavigationClickListener {
+            if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+                drawer_layout.closeDrawer(GravityCompat.START)
+            } else {
+                drawer_layout.openDrawer(GravityCompat.START)
+            }
+        }
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -58,18 +85,18 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
 
     abstract fun initNavHeaderView(navigationView: NavigationView)
 
-    var currentFragment:BaseFragment?=null
-    var oldFragment:BaseFragment?=null
-    private var isMakeScrollow: Int=0
+    var currentFragment: BaseFragment? = null
+    var oldFragment: BaseFragment? = null
+    private var isMakeScrollow: Int = 0
 
     private fun initBottom() {
         initVp()
         val imageResources = intArrayOf(R.drawable.menu_a, R.drawable.menu_b,
-                            R.drawable.menu_c, R.drawable.menu_d, R.drawable.menu_e)
+                R.drawable.menu_c, R.drawable.menu_d, R.drawable.menu_e)
         val color = R.color.white
-        val colorResources = intArrayOf(color, color,color,color,color)
+        val colorResources = intArrayOf(color, color, color, color, color)
         val strArr = getMenuStrResArr()
-        Observable.just(0,1,2,3,4).subscribe { bottomNavigation.addItem(AHBottomNavigationItem(strArr[it], imageResources[it], colorResources[it])) }
+        Observable.just(0, 1, 2, 3, 4).subscribe { bottomNavigation.addItem(AHBottomNavigationItem(strArr[it], imageResources[it], colorResources[it])) }
 // Set background color
         bottomNavigation.defaultBackgroundColor = ContextCompat.getColor(this, R.color.white)
 // Disable the translation inside the CoordinatorLayout
@@ -98,8 +125,8 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
 //        bottomNavigation.setNotification(notification, 1)
 // Set listeners
         bottomNavigation.setOnTabSelectedListener { position, wasSelected ->
-            if (isMakeScrollow==0||isMakeScrollow==3){
-                isMakeScrollow=1
+            if (isMakeScrollow == 0 || isMakeScrollow == 3) {
+                isMakeScrollow = 1
             }
 //            if (currentFragment == null) {
 //                currentFragment = adapter?.getCurrentFragment()
@@ -107,19 +134,19 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
 
             if (wasSelected) {
                 currentFragment?.refresh()
-                isMakeScrollow=0
+                isMakeScrollow = 0
                 return@setOnTabSelectedListener true
             }
             container.setCurrentItem(position, false)
-            if (oldFragment != null&&isMakeScrollow==1) {
+            if (oldFragment != null && isMakeScrollow == 1) {
                 oldFragment?.willBeHidden()
-            }else if (oldFragment != null&&isMakeScrollow==2){
+            } else if (oldFragment != null && isMakeScrollow == 2) {
                 oldFragment?.clearAni()
             }
             currentFragment = adapter?.getItem(position)
-            if (isMakeScrollow==1) {
+            if (isMakeScrollow == 1) {
                 currentFragment?.willBeDisplayed()
-            }else if (isMakeScrollow==2){
+            } else if (isMakeScrollow == 2) {
                 currentFragment?.clearAni()
             }
             bottomNavigation.setNotification("", position)
@@ -193,7 +220,7 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
         bottomNavigation.currentItem = 0
     }
 
-    private var  adapter: BasePagerAdapter?=null
+    private var adapter: BasePagerAdapter? = null
 
     private fun initVp() {
         container.setOffscreenPageLimit(5)
@@ -202,7 +229,7 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
                 supportFragmentManager, getListFragment())
         container.adapter = adapter
         currentFragment = adapter?.getItem(0)
-        container.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
+        container.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
@@ -211,15 +238,15 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
             }
 
             override fun onPageSelected(position: Int) {
-                when(isMakeScrollow){
-                    0-> {
+                when (isMakeScrollow) {
+                    0 -> {
                         isMakeScrollow = 2
                         oldFragment = currentFragment
                     }
-                    1->isMakeScrollow = 3
+                    1 -> isMakeScrollow = 3
                 }
-                bottomNavigation.setCurrentItem(position,true)
-                changePage(position,toolbar)
+                bottomNavigation.setCurrentItem(position, true)
+                changePage(position, toolbar)
             }
 
         })
@@ -261,10 +288,14 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
         return super.onOptionsItemSelected(item)
     }
 
-//
+    //
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         on2NavigationItemSelected(item)
-        drawer_layout.closeDrawer(GravityCompat.START)
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            drawer_layout.openDrawer(GravityCompat.START)
+        }
         return true
     }
 

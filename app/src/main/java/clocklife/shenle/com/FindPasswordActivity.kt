@@ -2,8 +2,8 @@ package clocklife.shenle.com
 
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import clocklife.shenle.com.base.dao.DbDao
 import clocklife.shenle.com.db.bean.AppUserInfo
-import clocklife.shenle.com.db.bean.AppUserInfo_Table
 import com.mob.ums.OperationCallback
 import com.mob.ums.UMSSDK
 import kotlinx.android.synthetic.main.activity_find_password.*
@@ -55,7 +55,7 @@ class FindPasswordActivity : BaseActivity(){
 
                 override fun onSuccess(p0: Void?) {
                     dialog.dismiss()
-                    val user = DBHelper.querySingleOrMake(AppUserInfo::class.java, AppUserInfo_Table.phone.eq(phone))
+                    val user = DbDao.findUserByPhone(phone) as AppUserInfo
                     user.phone = phone
                     user.password = userPassword1.editText?.text.toString().trim()
                     user.update()

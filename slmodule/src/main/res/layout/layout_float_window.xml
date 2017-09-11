@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,26 +8,24 @@
         android:id="@+id/video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_1"/>
+        android:background="@mipmap/bg_1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/NomorlText32White" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/NomorlText32White"
+            android:layout_marginTop="25dp" />
+    </slmodule.shenle.com.floatwindow.FakeVideoView>
 
     <ImageView
         android:id="@+id/close"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="top|end"
-        android:src="@drawable/selector_icon_close"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:gravity="center"
-                  android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/NomorlText32White"
-        />
-        <TextView
-            android:id="@+id/tv_content"
-            style="@style/NomorlText32White"
-            android:layout_marginTop="15dp"/>
-    </LinearLayout>
-
+        android:src="@drawable/selector_icon_close" />
 </FrameLayout>

@@ -4,9 +4,9 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import clocklife.shenle.com.base.BaseAppActivity
+import clocklife.shenle.com.base.dao.DbDao
 import clocklife.shenle.com.base.data.BaseAppState
 import clocklife.shenle.com.db.bean.AppUserInfo
-import clocklife.shenle.com.db.bean.AppUserInfo_Table
 import cn.jpush.im.android.api.JMessageClient
 import cn.jpush.im.api.BasicCallback
 import com.mob.ums.OperationCallback
@@ -64,14 +64,11 @@ class LoginActivity : BaseAppActivity() {
                     override fun onSuccess(user: User) {
                         // 执行成功的操作
                         dialog.dismiss()
-                        val where = AppUserInfo_Table.uid.eq(user.id.get())
-                        val appUserInfo = DBHelper.querySingleOrMake(AppUserInfo::class.java,where)
+                        val appUserInfo = DbDao.findUserByUserId(user.id.get()) as AppUserInfo
                         appUserInfo.uid = user.id.get()
                         appUserInfo.name = user.nickname.get()
                         appUserInfo.phone = user.phone.get()
-                        if (user.gender.get()==null){
-                            appUserInfo.gender = 0
-                        }else{
+                        if (user.gender.get()!=null) {
                             appUserInfo.gender = user.gender.get().code()
                         }
                         appUserInfo.photo = user.avatar.get().get(0)

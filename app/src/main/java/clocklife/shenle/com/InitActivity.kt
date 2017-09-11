@@ -3,9 +3,9 @@ package clocklife.shenle.com
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import clocklife.shenle.com.base.BaseAppActivity
+import clocklife.shenle.com.base.dao.DbDao
 import clocklife.shenle.com.base.data.BaseAppState
 import clocklife.shenle.com.db.bean.AppUserInfo
-import clocklife.shenle.com.db.bean.AppUserInfo_Table
 import clocklife.shenle.com.help.MyUtils
 import cn.jpush.im.android.api.JMessageClient
 import cn.jpush.im.api.BasicCallback
@@ -26,7 +26,7 @@ class InitActivity : BaseAppActivity() {
     }
 
     override fun initOnCreate(savedInstanceState: Bundle?) {
-        val appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true))
+        val appUserInfo = DbDao.findUserByIsLogin(true)
         if (appUserInfo != null) {
             BaseAppState.userUid = appUserInfo.uid
             BaseAppState.userName = appUserInfo.name

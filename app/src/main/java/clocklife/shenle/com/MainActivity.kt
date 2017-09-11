@@ -10,9 +10,9 @@ import android.view.KeyEvent
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import clocklife.shenle.com.base.dao.DbDao
 import clocklife.shenle.com.base.data.BaseAppState
 import clocklife.shenle.com.db.bean.AppUserInfo
-import clocklife.shenle.com.db.bean.AppUserInfo_Table
 import clocklife.shenle.com.help.MyUtils
 import clocklife.shenle.com.one.fragment.*
 import cn.jpush.im.android.api.JMessageClient
@@ -34,7 +34,7 @@ import slmodule.shenle.com.utils.BitmapUtils
 class MainActivity : BaseMainActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
-        var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true))
+        var appUserInfo = DbDao.findUserByIsLogin(true)
         BaseAppState.setData(appUserInfo)
     }
     override fun initToolBar(): Toolbar? {
@@ -71,7 +71,7 @@ class MainActivity : BaseMainActivity() {
             }
         }
         (headerView.findViewById(R.id.tv_name) as TextView).text = BaseAppState.userName
-        var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true))
+        var appUserInfo = DbDao.findUserByIsLogin(true)
         if (appUserInfo != null) {
             (headerView.findViewById(R.id.tv_sign) as TextView).text = appUserInfo.sign
             var ivPhoto = headerView.findViewById(R.id.iv_photo) as ImageView
@@ -127,9 +127,9 @@ class MainActivity : BaseMainActivity() {
             UMSSDK.logout(object : OperationCallback<Void>() {
                 override fun onSuccess(p0: Void?) {
                     dialog.dismiss()
-                    var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true))
+                    var appUserInfo = DbDao.findUserByIsLogin(true)
                     appUserInfo?.hasLogin = false
-                    appUserInfo.update()
+                    appUserInfo?.update()
                     BaseAppState.clear()
                     JMessageClient.logout()
                     InitActivity.goHere()

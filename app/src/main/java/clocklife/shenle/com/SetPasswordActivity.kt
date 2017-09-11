@@ -3,8 +3,8 @@ package clocklife.shenle.com
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import clocklife.shenle.com.base.BaseAppActivity
+import clocklife.shenle.com.base.dao.DbDao
 import clocklife.shenle.com.db.bean.AppUserInfo
-import clocklife.shenle.com.db.bean.AppUserInfo_Table
 import cn.jpush.im.android.api.JMessageClient
 import cn.jpush.im.api.BasicCallback
 import com.mob.ums.OperationCallback
@@ -77,7 +77,7 @@ class SetPasswordActivity : BaseAppActivity() {
 //            User user 一同提交注册的用户资料
 //            OperationCallback callback 操作回调
             dialog.show()
-            UMSSDK.registerWithPhoneNumber("86",phone,code,userPassword1.editText?.text.toString().trim(),User(),object: OperationCallback<User>() {
+            UMSSDK.registerWithPhoneNumber("86", phone, code, userPassword1.editText?.text.toString().trim(), User(), object : OperationCallback<User>() {
                 override fun onCancel() {
                     dialog.dismiss()
                 }
@@ -85,37 +85,34 @@ class SetPasswordActivity : BaseAppActivity() {
                 override fun onFailed(p0: Throwable) {
                     dialog.dismiss()
                     UIUtils.showToastSafe(p0.message)
-                    if (p0.message!!.contains("已经存在")){
+                    if (p0.message!!.contains("已经存在")) {
                         LoginActivity.goHere()
                         RxBus.get().post(RegisterSuccess())
                         finish()
-                    }else if (p0.message!!.contains("验证码")){
+                    } else if (p0.message!!.contains("验证码")) {
                         finish()
                     }
                 }
 
                 override fun onSuccess(user: User) {
                     dialog.dismiss()
-                    val where = AppUserInfo_Table.uid.eq(user.id.get())
-                    var appUserInfo = DBHelper.querySingleOrMake(AppUserInfo::class.java,where)
+                    var appUserInfo = DbDao.findUserByUserId(user.id.get()) as AppUserInfo
                     appUserInfo.uid = user.id.get()
                     appUserInfo.name = user.nickname.get()
                     appUserInfo.phone = user.phone.get()
-                    if (user.gender.get()==null){
-                        appUserInfo.gender = 0
-                    }else{
+                    if (user.gender.get()!=null) {
                         appUserInfo.gender = user.gender.get().code()
                     }
                     appUserInfo.photo = user.avatar.get().get(0)
                     appUserInfo.hasLogin = true
                     appUserInfo.password = userPassword1.editText?.text.toString().trim()
                     appUserInfo.update()
-                    JMessageClient.register("sl"+user.nickname.get(), userPassword1.editText?.text.toString().trim(), object :BasicCallback(){
+                    JMessageClient.register("sl" + user.nickname.get(), userPassword1.editText?.text.toString().trim(), object : BasicCallback() {
                         override fun gotResult(code: Int, p1: String?) {
-                            if (code==0){
+                            if (code == 0) {
                                 //注册成功
                             }
-                            UIUtils.showToastSafe("code=${code}"+p1)
+                            UIUtils.showToastSafe("code=${code}" + p1)
                             MainActivity.goHere()
                             RxBus.get().post(RegisterSuccess())
                             finish()
@@ -127,7 +124,8 @@ class SetPasswordActivity : BaseAppActivity() {
     }
 
     companion object {
-        @JvmStatic fun goHere(phone: String,code:String) {
+        @JvmStatic
+        fun goHere(phone: String, code: String) {
             val bundle = Bundle()
             bundle.putString("phone", phone)
             bundle.putString("code", code)
@@ -142,5 +140,6 @@ class SetPasswordActivity : BaseAppActivity() {
 //        return false
 //    }
 }
+
 class RegisterSuccess
 

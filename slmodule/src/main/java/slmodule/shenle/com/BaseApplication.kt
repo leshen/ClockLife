@@ -133,8 +133,12 @@ open class BaseApplication : MultiDexApplication() {
      * mob
      */
     private fun initMB() {
-        MobSDK.init(this, UIUtils.getString(R.string.MobAppKey), UIUtils.getString(R.string.MobAppSecret))
-    }
+        try {
+            MobSDK.init(this, UIUtils.getString(R.string.MobAppKey), UIUtils.getString(R.string.MobAppSecret))
+
+        }catch (e:Exception){
+            e.printStackTrace()
+        }}
 
     /**
      * DBFlow

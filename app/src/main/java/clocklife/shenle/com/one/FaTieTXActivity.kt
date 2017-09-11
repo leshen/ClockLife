@@ -98,9 +98,9 @@ class FaTieTXActivity : BaseAppActivity() {
     fun onSubmit(view: View) {
         if (MyUtils.isLogin()) {
             //发布提醒
-            content = ti_content.editText.toString()
-            title = ti_title.editText.toString()
-            phone = ti_user.editText.toString()
+            content = ti_content.editText?.text.toString()
+            title = ti_title.editText?.text.toString()
+            phone = ti_user.editText?.text.toString()
             var time_str = bt_time.text.toString()
             if(UIUtils.isEmpty(time_str)){
                 UIUtils.showSnackBar(bt_time,"提醒时间不能为空")
@@ -119,7 +119,6 @@ class FaTieTXActivity : BaseAppActivity() {
                 return
             }
             clockTime = TimeUtil.getStringToDate(bt_time.text.toString(),TimeUtil.PATTERN_ALL)
-            val content = ti_content.editText.toString()
             val msg = TXMessage()
             msg.setContent(content!!)
             msg.setTime(clockTime!!)

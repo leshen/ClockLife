@@ -5,9 +5,9 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.View
 import clocklife.shenle.com.R
+import clocklife.shenle.com.base.dao.DbDao
 import clocklife.shenle.com.base.data.BaseAppState
 import clocklife.shenle.com.db.bean.AppUserInfo
-import clocklife.shenle.com.db.bean.AppUserInfo_Table
 import clocklife.shenle.com.one.fragment.MySendTxFragment
 import clocklife.shenle.com.one.fragment.MyTxFragment
 import clocklife.shenle.com.one.fragment.TXSelfFragment
@@ -35,7 +35,7 @@ import slmodule.shenle.com.utils.UIUtils
 class TXActivity : BaseVPActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
-        var appUserInfo = DBHelper.querySingle(AppUserInfo::class.java, AppUserInfo_Table.hasLogin.eq(true))
+        var appUserInfo = DbDao.findUserByIsLogin(true)
         BaseAppState.setData(appUserInfo)
     }
     override fun getListFragment(): List<BaseFragment>? {
