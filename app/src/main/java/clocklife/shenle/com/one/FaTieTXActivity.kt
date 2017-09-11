@@ -2,12 +2,9 @@ package clocklife.shenle.com.one
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.View
-import android.widget.DatePicker
-import android.widget.TimePicker
 import clocklife.shenle.com.R
 import clocklife.shenle.com.base.BaseAppActivity
 import clocklife.shenle.com.base.message.TXMessage
@@ -19,9 +16,9 @@ import cn.jpush.im.api.BasicCallback
 import com.readystatesoftware.systembartint.SystemBarTintManager
 import kotlinx.android.synthetic.main.activity_fatie_tx_edit.*
 import kotlinx.android.synthetic.main.base_toolbar.*
+import slmodule.shenle.com.utils.TimeUtil
 import slmodule.shenle.com.utils.UIUtils
 import java.util.*
-import slmodule.shenle.com.utils.TimeUtil
 
 class FaTieTXActivity : BaseAppActivity() {
     override fun initToolBar(): Toolbar? {
