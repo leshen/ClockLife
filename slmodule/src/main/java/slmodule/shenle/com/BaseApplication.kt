@@ -10,9 +10,11 @@ import android.os.Process
 import android.support.multidex.MultiDex
 import android.support.multidex.MultiDexApplication
 import android.util.Log
+import cn.bmob.v3.Bmob
 import cn.jpush.im.android.api.JMessageClient
 import com.aitangba.swipeback.ActivityLifecycleHelper
 import com.mob.MobSDK
+import com.qihoo360.mobilesafe.core.BuildConfig
 import com.qihoo360.replugin.RePlugin
 import com.qihoo360.replugin.RePluginCallbacks
 import com.qihoo360.replugin.RePluginConfig
@@ -37,7 +39,11 @@ open class BaseApplication : MultiDexApplication() {
             // 非首次启动
             MultiDex.install(base)
         }
-        RePlugin.App.attachBaseContext(this, createConfig())
+        try {
+            RePlugin.App.attachBaseContext(this, createConfig())
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
     /**
@@ -109,6 +115,29 @@ open class BaseApplication : MultiDexApplication() {
         initLib()
         initXunFei()
         initMB()
+        initBmob()
+    }
+
+    private fun initBmob() {
+        //云数据库
+        //第一：默认初始化
+//        Bmob.initialize(this, UIUtils.getString(R.string.BmobAppKey));
+        // 注:自v3.5.2开始，数据sdk内部缝合了统计sdk，开发者无需额外集成，传渠道参数即可，不传默认没开启数据统计功能
+        Bmob.initialize(this, UIUtils.getString(R.string.BmobAppKey));
+//        Bmob.initialize(this, UIUtils.getString(R.string.BmobAppKey),"bmob");
+
+        //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，
+        //BmobConfig config =new BmobConfig.Builder(this)
+        ////设置appkey
+        //.setApplicationId("Your Application ID")
+        ////请求超时时间（单位为秒）：默认15s
+        //.setConnectTimeout(30)
+        ////文件分片上传时每片的大小（单位字节），默认512*1024
+        //.setUploadBlockSize(1024*1024)
+        ////文件的过期时间(单位为秒)：默认1800s
+        //.setFileExpiration(2500)
+        //.build();
+        //Bmob.initialize(config);
     }
 
     override fun onLowMemory() {

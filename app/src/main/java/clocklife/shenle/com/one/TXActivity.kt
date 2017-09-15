@@ -17,6 +17,7 @@ import slmodule.guide.view.Guide
 import slmodule.guide.view.GuideBuilder
 import slmodule.shenle.com.BaseFragment
 import slmodule.shenle.com.BaseVPActivity
+import slmodule.shenle.com.floatwindow.FloatWindowPermissionChecker
 import slmodule.shenle.com.helper.DBHelper
 import slmodule.shenle.com.utils.UIUtils
 
@@ -85,6 +86,10 @@ class TXActivity : BaseVPActivity() {
     }
     override fun initOnCreate(savedInstanceState: Bundle?) {
         super.initOnCreate(savedInstanceState)
+        if (!FloatWindowPermissionChecker.checkFloatWindowPermission()) {
+            FloatWindowPermissionChecker.askForFloatWindowPermission(this)
+            return
+        }
     }
 
     private var guide: Guide? =null

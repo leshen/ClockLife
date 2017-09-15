@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="clocklife.shenle.com">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -43,7 +44,6 @@
     <!-- Required -->
     <uses-permission android:name="clocklife.shenle.com.permission.JPUSH_MESSAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -176,11 +176,13 @@
          <!-- 目前这个渠道统计功能的报表还未开放。-->
          <meta-data
          android:name="JPUSH_CHANNEL"
+         tools:replace="android:value"
          android:value="developer-default" />
 
          <!-- Required. AppKey copied from Portal -->
          <meta-data
          android:name="JPUSH_APPKEY"
+         tools:replace="android:value"
          android:value="4ab8b4dbfd37a5a2e60e3a57" />
          <!--极光im-->
 
@@ -260,13 +262,27 @@
             </intent-filter>
         </service>
 
-
+        <!--辅助功能服务-->
+        <service android:name=".base.receiver.MyAccessibilityService"
+                 android:label="@string/accessibility_service_label"
+                 android:enabled="true"
+                 android:exported="true"
+                 android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility"/>
+        </service>
+        <meta-data android:value="bmob" android:name="BMOB_CHANNEL"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".InitActivity"
             android:exported="true"
@@ -281,15 +297,22 @@
         </activity>
         <activity
             android:name=".LoginActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_login">
         </activity>
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".FindPasswordActivity"/>
-        <activity android:name=".SetPasswordActivity"/>
-        <activity android:name=".one.TXActivity">
+        <activity android:name=".RegisterActivity"
+                  android:theme="@style/AppTheme"/>
+        <activity android:name=".FindPasswordActivity"
+                  android:theme="@style/AppTheme"/>
+        <activity android:name=".SetPasswordActivity"
+                  android:theme="@style/AppTheme"/>
+        <activity android:name=".one.TXActivity"
+                  android:theme="@style/AppTheme">
         </activity>
         <activity android:name=".one.FaTieTXActivity"
+                  android:theme="@style/AppTheme"
                   android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".setting.MyAppSetting"/>
     </application>
 
 </manifest>

@@ -15,9 +15,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.OvershootInterpolator
+import cn.bmob.v3.update.BmobUpdateAgent
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
-import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_base_main.*
 import kotlinx.android.synthetic.main.base_toolbar.*
 import kotlinx.android.synthetic.main.content_base_main.*
@@ -33,14 +33,12 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
     }
 
     override fun getRootView(): Int {
-//        val enabledTranslucentNavigation = getSharedPreferences("shared", Context.MODE_PRIVATE)
-//                .getBoolean("translucentNavigation", false)
-//        setTheme(if (enabledTranslucentNavigation) R.style.AppTheme_TranslucentNavigation else R.style.AppTheme)
         return R.layout.activity_base_main
     }
 
     override fun initOnCreate(savedInstanceState: Bundle?) {
-//        setSupportActionBar(toolbar)
+        BmobUpdateAgent.setUpdateOnlyWifi(false)
+        BmobUpdateAgent.update(this)
         fab.setOnClickListener {
             Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
@@ -96,7 +94,10 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
         val color = R.color.white
         val colorResources = intArrayOf(color, color, color, color, color)
         val strArr = getMenuStrResArr()
-        Observable.just(0, 1, 2, 3, 4).subscribe { bottomNavigation.addItem(AHBottomNavigationItem(strArr[it], imageResources[it], colorResources[it])) }
+        for (i in 0..4){
+            bottomNavigation.addItem(AHBottomNavigationItem(strArr[i], imageResources[i], colorResources[i]))
+        }
+//        Observable.just(0, 1, 2, 3, 4).subscribe { bottomNavigation.addItem(AHBottomNavigationItem(strArr[it], imageResources[it], colorResources[it])) }
 // Set background color
         bottomNavigation.defaultBackgroundColor = ContextCompat.getColor(this, R.color.white)
 // Disable the translation inside the CoordinatorLayout

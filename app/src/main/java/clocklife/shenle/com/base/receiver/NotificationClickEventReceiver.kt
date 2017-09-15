@@ -14,8 +14,7 @@ import slmodule.shenle.com.utils.UIUtils
 import cn.jpush.im.android.api.JMessageClient.getMyInfo
 import cn.jpush.im.android.api.model.UserInfo
 import cn.jpush.im.android.api.event.LoginStateChangeEvent
-
-
+import slmodule.shenle.com.floatwindow.FloatWindowPermissionChecker
 
 
 /**
@@ -93,7 +92,7 @@ class NotificationClickEventReceiver {
                     val type = customContent.getNumberExtra("type")
                     val title = customContent.getStringExtra("title")
                     val content = customContent.getStringExtra("content")
-                    ClockDao.setAlarmTime(UIUtils.context,time,title,content,""+type)
+                    ClockDao.setAlarmTime(mContext,time,title,content,""+type)
                 }
                 UIUtils.showToastSafe(customContent.toJson())
             }

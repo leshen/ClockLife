@@ -6,9 +6,10 @@ import android.view.View
 import clocklife.shenle.com.base.BaseAppActivity
 import cn.smssdk.EventHandler
 import cn.smssdk.SMSSDK
+import com.readystatesoftware.systembartint.SystemBarTintManager
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_register.*
-import slmodule.shenle.com.BaseActivity
+import kotlinx.android.synthetic.main.base_edit_toolbar.*
 import slmodule.shenle.com.utils.LogUtils
 import slmodule.shenle.com.utils.SmsHelper
 import slmodule.shenle.com.utils.UIUtils
@@ -16,7 +17,12 @@ import slmodule.shenle.com.utils.UIUtils
 
 class RegisterActivity : BaseAppActivity() {
     override fun initToolBar(): Toolbar? {
+        toolbar?.title = "重置密码"
         return toolbar
+    }
+
+    override fun setSystemBarTintColor(tintManager: SystemBarTintManager): Int {
+        return R.color.bg_2
     }
 
     private lateinit var observable1: Observable<RegisterSuccess>

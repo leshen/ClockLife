@@ -4,6 +4,7 @@
     <string name="MobAppSecret">c0946f65653be15281d289286001960b</string>
     <string name="RonYunAppKey">sfci50a7s1zai</string>//测试环境
     <string name="XunFeiAppKey">c936aaf92fe4e92876c2018f69c2dc97</string>
+    <string name="BmobAppKey">5f8bfff677f28b5851f0b64a9ad0c51c</string>
 
 
     <string name="title_activity_base_main">BaseMainActivity</string>
@@ -19,4 +20,5 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="zhuxiao">注销</string>
+    <string name="setting">设置</string>
 </resources>

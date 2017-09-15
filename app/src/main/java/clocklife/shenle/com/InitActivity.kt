@@ -2,6 +2,7 @@ package clocklife.shenle.com
 
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import android.widget.Toast
 import clocklife.shenle.com.base.BaseAppActivity
 import clocklife.shenle.com.base.dao.DbDao
 import clocklife.shenle.com.base.data.BaseAppState
@@ -10,7 +11,6 @@ import clocklife.shenle.com.help.MyUtils
 import cn.jpush.im.android.api.JMessageClient
 import cn.jpush.im.api.BasicCallback
 import io.reactivex.Observable
-import slmodule.shenle.com.helper.DBHelper
 import slmodule.shenle.com.utils.UIUtils
 import java.util.concurrent.TimeUnit
 
@@ -38,7 +38,7 @@ class InitActivity : BaseAppActivity() {
                         override fun gotResult(code: Int, p1: String?) {
                             if (code==0){
                                 //登录成功
-                                MainActivity.goHere()
+                                MainActivity.goHere(this@InitActivity)
                                 UIUtils.finishDelay(2,this@InitActivity)
                             }else if(code==801003){
                                 JMessageClient.register("sl"+appUserInfo.phone, appUserInfo.password, object : BasicCallback(){
@@ -50,23 +50,23 @@ class InitActivity : BaseAppActivity() {
                                                     if (code == 0) {
                                                         //登录成功
                                                     }
-                                                    MainActivity.goHere()
+                                                    MainActivity.goHere(this@InitActivity)
                                                     UIUtils.finishDelay(2, this@InitActivity)
-                                                    UIUtils.showToastSafe("code=${code}"+p1)
+                                                    Toast.makeText(this@InitActivity,"code=${code}"+p1,Toast.LENGTH_SHORT).show()
                                                 }
                                             })
                                         }else{
-                                            MainActivity.goHere()
+                                            MainActivity.goHere(this@InitActivity)
                                             UIUtils.finishDelay(2, this@InitActivity)
-                                            UIUtils.showToastSafe("code=${code}"+p1)
+                                            Toast.makeText(this@InitActivity,"code=${code}"+p1,Toast.LENGTH_SHORT).show()
                                         }
 
                                     }})
                             }else{
-                                MainActivity.goHere()
+                                MainActivity.goHere(this@InitActivity)
                                 UIUtils.finishDelay(2,this@InitActivity)
                             }
-                            UIUtils.showToastSafe("code=${code}"+p1)
+                            Toast.makeText(this@InitActivity,"code=${code}"+p1,Toast.LENGTH_SHORT).show()
                         }
                     })
                 }

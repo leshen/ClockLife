@@ -1,10 +1,14 @@
 package clocklife.shenle.com
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
 import android.view.MenuItem
@@ -15,6 +19,7 @@ import clocklife.shenle.com.base.data.BaseAppState
 import clocklife.shenle.com.db.bean.AppUserInfo
 import clocklife.shenle.com.help.MyUtils
 import clocklife.shenle.com.one.fragment.*
+import clocklife.shenle.com.setting.MyAppSetting
 import cn.jpush.im.android.api.JMessageClient
 import com.bumptech.glide.Glide
 import com.mob.ums.OperationCallback
@@ -22,7 +27,6 @@ import com.mob.ums.UMSSDK
 import jp.wasabeef.glide.transformations.CropCircleTransformation
 import slmodule.shenle.com.BaseFragment
 import slmodule.shenle.com.BaseMainActivity
-import slmodule.shenle.com.helper.DBHelper
 import slmodule.shenle.com.utils.UIUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -84,8 +88,8 @@ class MainActivity : BaseMainActivity() {
     }
 
     companion object {
-        fun goHere() {
-            UIUtils.startActivity(MainActivity::class.java)
+        fun goHere(activity : Activity) {
+            activity.startActivity(Intent(activity,MainActivity::class.java))
         }
     }
 
@@ -119,7 +123,9 @@ class MainActivity : BaseMainActivity() {
 
         } else if (id == slmodule.shenle.com.R.id.nav_manage) {
 
-        } else if (id == slmodule.shenle.com.R.id.nav_share) {
+        } else if (id == slmodule.shenle.com.R.id.nav_setting) {
+            //设置
+            MyAppSetting.goHere()
 
         } else if (id == slmodule.shenle.com.R.id.nav_login_out) {
             //注销
@@ -154,7 +160,12 @@ class MainActivity : BaseMainActivity() {
      */
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            moveTaskToBack(false);
+            val drawer_layout = findViewById(slmodule.shenle.com.R.id.drawer_layout) as DrawerLayout
+            if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+                drawer_layout.closeDrawer(GravityCompat.START)
+                return true
+            }
+            moveTaskToBack(false)
 //            if (mIsExit) {
 //                this.finish()
 //            } else {

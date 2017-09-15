@@ -2,25 +2,41 @@ package clocklife.shenle.com
 
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import android.view.View
+import clocklife.shenle.com.R.id.*
 import clocklife.shenle.com.base.dao.DbDao
 import clocklife.shenle.com.db.bean.AppUserInfo
 import com.mob.ums.OperationCallback
 import com.mob.ums.UMSSDK
+import com.readystatesoftware.systembartint.SystemBarTintManager
 import kotlinx.android.synthetic.main.activity_find_password.*
+import kotlinx.android.synthetic.main.base_edit_toolbar.*
 import slmodule.shenle.com.BaseActivity
-import slmodule.shenle.com.helper.DBHelper
 import slmodule.shenle.com.utils.RxBus
+import slmodule.shenle.com.utils.SmsHelper
 import slmodule.shenle.com.utils.UIUtils
 
 class FindPasswordActivity : BaseActivity(){
     override fun initToolBar(): Toolbar? {
+        toolbar?.title = "重置密码"
         return toolbar
     }
 
+    override fun setSystemBarTintColor(tintManager: SystemBarTintManager): Int {
+        return R.color.bg_2
+    }
     override fun getRootView(): Int {
         return R.layout.activity_find_password
     }
-
+    fun onCode(v: View){
+        //发送验证码
+        var phone = et_phone.text.toString().trim()
+        if (!UIUtils.isEmpty(phone)) {
+            SmsHelper.sendYZM(phone, bt_code)
+        } else {
+            UIUtils.showToastSafe("手机号不能为空")
+        }
+    }
     override fun initOnCreate(savedInstanceState: Bundle?) {
         userPassword1.hint = UIUtils.getString(R.string.set_new_password)
         userPassword2.hint = UIUtils.getString(R.string.set_password_again)

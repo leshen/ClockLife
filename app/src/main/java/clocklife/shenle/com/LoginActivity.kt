@@ -85,7 +85,7 @@ class LoginActivity : BaseAppActivity() {
                             override fun gotResult(code: Int, p1: String?) {
                                 if (code==0){
                                     //登录成功
-                                    MainActivity.goHere()
+                                    MainActivity.goHere(this@LoginActivity)
                                     UIUtils.finishDelay(2,this@LoginActivity)
                                 }else if(code==801003){
                                     JMessageClient.register("sl"+user.phone.get(), userPassword.editText?.text.toString().trim(), object :BasicCallback(){
@@ -97,20 +97,20 @@ class LoginActivity : BaseAppActivity() {
                                                         if (code == 0) {
                                                             //登录成功
                                                         }
-                                                        MainActivity.goHere()
+                                                        MainActivity.goHere(this@LoginActivity)
                                                         UIUtils.finishDelay(2, this@LoginActivity)
                                                         UIUtils.showToastSafe("code=${code}"+p1)
                                                     }
                                                 })
                                             }else{
-                                                MainActivity.goHere()
+                                                MainActivity.goHere(this@LoginActivity)
                                                 UIUtils.finishDelay(2, this@LoginActivity)
                                                 UIUtils.showToastSafe("code=${code}"+p1)
                                             }
 
                                         }})
                                 }else{
-                                    MainActivity.goHere()
+                                    MainActivity.goHere(this@LoginActivity)
                                     UIUtils.finishDelay(2,this@LoginActivity)
                                 }
                                 UIUtils.showToastSafe("code=${code}"+p1)

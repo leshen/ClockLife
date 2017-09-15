@@ -113,7 +113,7 @@ class SetPasswordActivity : BaseAppActivity() {
                                 //注册成功
                             }
                             UIUtils.showToastSafe("code=${code}" + p1)
-                            MainActivity.goHere()
+                            MainActivity.goHere(this@SetPasswordActivity)
                             RxBus.get().post(RegisterSuccess())
                             finish()
                         }

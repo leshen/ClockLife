@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'kotlin-android'
@@ -66,10 +65,11 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-vector-drawable:25.3.1'
     testCompile 'junit:junit:4.12'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.aurelhubert:ahbottomnavigation:2.0.6'
     compile project(':XunFeiLib')
     compile 'com.android.support:multidex:1.0.1'
@@ -79,7 +79,6 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     // If you want to use the GPU Filters
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
-    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     compile 'com.github.ashqal:ChromeLikeSwipeLayout:0.4'
     compile 'cn.jiguang.sdk:jmessage:2.2.1'
     // 此处以JMessage 2.2.1 版本为例。
@@ -93,6 +92,8 @@ dependencies {
     compile project(':MobAPI')
     //时间选择器
     //    compile 'com.wdullaer:materialdatetimepicker:3.3.0'
+//    compile project(':bmob')
+    compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
 }
 repositories {
     //    mavenCentral()
