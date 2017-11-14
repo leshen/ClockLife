@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\le\Documents\GitHub\ClockLife\MobAPI\src\main\assets"><file name="ShareSDK.xml" path="C:\Users\le\Documents\GitHub\ClockLife\MobAPI\src\main\assets\ShareSDK.xml"/></source><source path="C:\Users\le\Documents\GitHub\ClockLife\MobAPI\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="C:\Users\le\Documents\GitHub\ClockLife\MobAPI\src\release\assets"/></dataSet></merger>

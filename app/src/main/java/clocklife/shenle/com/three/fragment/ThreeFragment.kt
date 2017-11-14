@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import clocklife.shenle.com.R
+import com.amap.api.maps2d.SupportMapFragment
 import slmodule.shenle.com.BaseFragment
 
 /**
@@ -19,6 +20,8 @@ class ThreeFragment : BaseFragment() {
     }
 
     override fun initOnCreateView(view: View?, savedInstanceState: Bundle?) {
+        val newInstance = SupportMapFragment.newInstance()
+        childFragmentManager.beginTransaction().replace(R.id.fl,newInstance).commitAllowingStateLoss()
     }
 
     override fun refresh() {

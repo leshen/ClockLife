@@ -3,6 +3,7 @@ package clocklife.shenle.com.one.fragment
 import android.os.Bundle
 import android.view.View
 import clocklife.shenle.com.R
+import cn.jpush.im.android.api.JMessageClient
 import slmodule.shenle.com.BaseFragment
 
 /**
@@ -18,6 +19,7 @@ class MySendTxFragment : BaseFragment(){
     }
 
     override fun initOnCreateView(view: View?, savedInstanceState: Bundle?) {
+        val conversationList = JMessageClient.getConversationList()
 
     }
 

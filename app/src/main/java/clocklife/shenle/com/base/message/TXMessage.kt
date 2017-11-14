@@ -34,4 +34,10 @@ class TXMessage : CustomContent() {
     fun getType():Int{
         return getNumberValue("type") as Int
     }
+    fun setPhoto(type :String){
+        setStringExtra("photo",type)
+    }
+    fun getPhoto():String{
+        return getStringValue("photo")
+    }
 }

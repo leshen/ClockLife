@@ -18,6 +18,7 @@ import android.view.animation.OvershootInterpolator
 import cn.bmob.v3.update.BmobUpdateAgent
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
+import com.readystatesoftware.systembartint.SystemBarTintManager
 import kotlinx.android.synthetic.main.activity_base_main.*
 import kotlinx.android.synthetic.main.base_toolbar.*
 import kotlinx.android.synthetic.main.content_base_main.*
@@ -35,7 +36,9 @@ abstract class BaseMainActivity : BaseActivity(), NavigationView.OnNavigationIte
     override fun getRootView(): Int {
         return R.layout.activity_base_main
     }
-
+    override fun setSystemBarTintColor(tintManager: SystemBarTintManager): Int {
+        return R.color.text_color_2
+    }
     override fun initOnCreate(savedInstanceState: Bundle?) {
         BmobUpdateAgent.setUpdateOnlyWifi(false)
         BmobUpdateAgent.update(this)

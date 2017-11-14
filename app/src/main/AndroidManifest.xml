@@ -14,7 +14,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <!-- 连接网络权限 -->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_PROFILE"/>
@@ -33,7 +32,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <!-- 悬浮窗的权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -44,6 +42,13 @@
     <!-- Required -->
     <uses-permission android:name="clocklife.shenle.com.permission.JPUSH_MESSAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
+    <!--用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--用于申请调用A-GPS模块-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -193,7 +198,7 @@
         <meta-data
             android:name="IFLYTEK_CHANNEL"
             android:value="your_channel"/>
-        !-- push service start -->
+        <!-- push service start -->
         <!-- Push 服务 -->
         <service
             android:name="com.iflytek.pushclient.manager.PushService"
@@ -236,6 +241,17 @@
             </intent-filter>
         </receiver>
         <!-- 讯飞 -->
+
+        <!--bomb 自动更新-->
+        <activity
+            android:name="cn.bmob.v3.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <!--bomb 自动更新-->
+
+        <!--高德地图-->
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="f3352a47590f7af1d3c68d9309c14cd0"/>
+        <service android:name="com.amap.api.location.APSService"></service>
 
         <!--闹钟定时任务-->
         <receiver android:name=".base.receiver.AlarmReceiver"
@@ -313,6 +329,7 @@
                   android:theme="@style/AppTheme"
                   android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".setting.MyAppSetting"/>
+        <activity android:name=".one.FamilyMapActivity"/>
     </application>
 
 </manifest>

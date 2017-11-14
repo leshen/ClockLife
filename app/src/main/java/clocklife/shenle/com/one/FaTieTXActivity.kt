@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import clocklife.shenle.com.R
 import clocklife.shenle.com.base.BaseAppActivity
+import clocklife.shenle.com.base.data.BaseAppState
 import clocklife.shenle.com.base.message.TXMessage
 import clocklife.shenle.com.help.MyUtils
 import cn.jpush.im.android.api.JMessageClient
@@ -87,12 +88,12 @@ class FaTieTXActivity : BaseAppActivity() {
         content = "hahaha"
         title = "cs"
 //        clockTime = TimeUtil.getStringToDate("2017-09-05 16:15",TimeUtil.PATTERN_ALL_LESS)
-        clockTime = System.currentTimeMillis()+1000*5
+        clockTime = System.currentTimeMillis()+1000*60
 //        clockTime = SystemClock.elapsedRealtime()+1000*10
         ti_content.editText?.setText(content)
         ti_title.editText?.setText(title)
         ti_user.editText?.setText(phone)
-        bt_time.setText(TimeUtil.getDate2String(clockTime,TimeUtil.PATTERN_ALL))
+        bt_time.setText(TimeUtil.getDate2String(clockTime,TimeUtil.PATTERN_ALL_LESS))
     }
 
     fun onSubmit(view: View) {
@@ -118,16 +119,17 @@ class FaTieTXActivity : BaseAppActivity() {
                 ti_user.error="接收人电话号码不能为空"
                 return
             }
-            clockTime = TimeUtil.getStringToDate(bt_time.text.toString(),TimeUtil.PATTERN_ALL)
+            clockTime = TimeUtil.getStringToDate(bt_time.text.toString(),TimeUtil.PATTERN_ALL_LESS)
             val msg = TXMessage()
             msg.setContent(content!!)
             msg.setTime(clockTime!!)
             msg.setType(TXMessage.CLOCK_SELF)
             msg.setTitle(title!!)
-            var conv = JMessageClient.getSingleConversation("sl${phone}")
-            if (null == conv) {
-                conv = Conversation.createSingleConversation("sl${phone}")
-            }
+            msg.setPhoto(BaseAppState.userPhoto!!)
+//            var conv = JMessageClient.getSingleConversation("sl${phone}")
+//            if (null == conv) {
+                var conv = Conversation.createSingleConversation("sl${phone}")
+//            }
             val createSendMessage = conv.createSendMessage(msg)
             createSendMessage.setOnSendCompleteCallback(object : BasicCallback() {
                 override fun gotResult(responseCode: Int, responseDesc: String?) {

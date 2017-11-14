@@ -1,17 +1,18 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.neenbedankt.android-apt'
+//apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-def dbflow_version = "4.0.3"
+def dbflow_version = "4.1.2"
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        flavorDimensions "versionCode"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -23,6 +24,10 @@ android {
         }
     }
     productFlavors {
+    }
+    dexOptions {
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
     }
 }
 apply plugin: 'replugin-host-gradle'
@@ -46,57 +51,74 @@ repluginHostConfig {
     countNotTranslucentSingleTask = 3
     countNotTranslucentSingleInstance = 2
 }
+
 dependencies {
-    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+
     // 隔开
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+
     // 隔开
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+
     // 隔开
     compile "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:${dbflow_version}"
+
     // 隔开
     kapt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+
     // 隔开
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
     // 隔开
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:26.3.1'
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:support-vector-drawable:25.3.1'
+    compile 'com.android.support:design:26.3.1'
+    compile 'com.android.support:support-vector-drawable:26.3.1'
     testCompile 'junit:junit:4.12'
     compile 'com.aurelhubert:ahbottomnavigation:2.0.6'
     compile project(':XunFeiLib')
     compile 'com.android.support:multidex:1.0.1'
+
     //    compile 'com.github.bumptech.glide:glide:4.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
     kapt 'com.github.bumptech.glide:compiler:4.0.0'
     compile 'jp.wasabeef:glide-transformations:2.0.2'
+
     // If you want to use the GPU Filters
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
     compile 'com.github.ashqal:ChromeLikeSwipeLayout:0.4'
     compile 'cn.jiguang.sdk:jmessage:2.2.1'
+
     // 此处以JMessage 2.2.1 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.6'
+
     // 此处以JCore 1.1.6 版本为例。
     compile 'com.aitangba:swipeback:1.0.1'
+
     //滑动返回
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.4'
+
     //360插件化
     compile 'com.qihoo360.replugin:replugin-host-lib:2.2.0'
     compile project(':MobAPI')
+
     //时间选择器
+
     //    compile 'com.wdullaer:materialdatetimepicker:3.3.0'
-//    compile project(':bmob')
-    compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
-}
-repositories {
-    //    mavenCentral()
-    jcenter()
-    maven { url 'https://jitpack.io' }
+
+    //    compile project(':bmob')
+
+    //    compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
+    compile 'cn.bmob.android:bmob-sdk:3.5.5'
+    compile 'cn.bmob.android:http-legacy:1.0'
+
+    //recyclerhelper
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 }

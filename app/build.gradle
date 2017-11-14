@@ -1,18 +1,19 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
+//apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-def dbflow_version = "4.0.3"
+def dbflow_version = "4.1.2"
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "clocklife.shenle.com"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0.0"
+        flavorDimensions "versionCode"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
@@ -43,9 +44,24 @@ android {
             shrinkResources false
             signingConfig signingConfigs.debug
         }
+
+    }
+    //配置keystore签名
+    signingConfigs {
+        debug {
+            storeFile file("clocklife.jks")
+            storePassword "shen1le1"
+            keyAlias "clocklife"
+            keyPassword "shen1le1"
+        }
+//        matchingFallbacks = ['release','debug']
     }
     dexOptions {
+        preDexLibraries = false
         javaMaxHeapSize "4g"
+    }
+    packagingOptions {
+        pickFirst 'META-INF/*'
     }
 }
 // 360插件化ATTENTION!!! Must be PLACED AFTER "android{}" to read the applicationId
@@ -72,7 +88,7 @@ repluginHostConfig {
 }
 
 dependencies {
-    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
     // 隔开
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     // 隔开
@@ -91,10 +107,26 @@ dependencies {
     compile project(':slmodule')
     testCompile 'junit:junit:4.12'
     compile 'com.qihoo360.replugin:replugin-host-lib:2.2.0'
+    //高德2D地图
+    compile 'com.amap.api:map2d:latest.integration'
+    //3D地图so及jar 和导航
+    //    compile 'com.amap.api:navi-3dmap:latest.integration'
+    // 定位功能
+    compile 'com.amap.api:location:latest.integration'
+    //搜索功能
+    compile 'com.amap.api:search:latest.integration'
 }
-repositories {
-
-    //    mavenCentral()
-    jcenter()
-    maven { url 'https://jitpack.io' }
+kapt {
+    generateStubs = true
+}
+afterEvaluate {
+    tasks.matching {
+        it.name.startsWith('dex')
+    }.each { dx ->
+        if (dx.additionalParameters == null) {
+            dx.additionalParameters = []
+        }
+        dx.additionalParameters += '--multi-dex'
+        dx.additionalParameters += "--main-dex-list=$projectDir/<mainDex>".toString()
+    }
 }

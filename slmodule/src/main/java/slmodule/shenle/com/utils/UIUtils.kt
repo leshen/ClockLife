@@ -29,7 +29,6 @@ import io.reactivex.schedulers.Schedulers
 import slmodule.shenle.com.BaseActivity
 
 import slmodule.shenle.com.BaseApplication
-import slmodule.shenle.com.BaseHolder
 import slmodule.shenle.com.view.BadgeView
 import java.util.concurrent.TimeUnit
 
@@ -431,9 +430,9 @@ object UIUtils {
      * @param view
      */
     fun unbindDrawables(view: View?) {
-        if (view?.tag != null && view.tag is BaseHolder) {
-            (view.tag as BaseHolder).onDestroy()
-        }
+//        if (view?.tag != null && view.tag is BaseHolder) {
+//            (view.tag as BaseHolder).onDestroy()
+//        }
         if (view?.background != null) {
             view.background.callback = null
         }

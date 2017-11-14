@@ -3,6 +3,7 @@ package clocklife.shenle.com.one.fragment
 import android.os.Bundle
 import android.view.View
 import clocklife.shenle.com.R
+import clocklife.shenle.com.one.FamilyMapActivity
 import clocklife.shenle.com.one.TXActivity
 import com.asha.ChromeLikeSwipeLayout
 import com.asha.ChromeLikeSwipeLayout.dp2px
@@ -57,7 +58,7 @@ class OneFragment : BaseFragment(), View.OnClickListener {
             }
             R.id.bt_tbda->{}
             R.id.bt_jqbm->{
-                FloatWindowManager.getInstance().showFloatWindow(activity)
+                FamilyMapActivity.goHere()
             }
         }
     }

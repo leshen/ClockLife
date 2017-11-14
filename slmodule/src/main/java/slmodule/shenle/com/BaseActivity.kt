@@ -79,7 +79,7 @@ abstract class BaseActivity : RxAppCompatActivity(), SwipeBackHelper.SlideBackMa
         }
     }
     open fun setSystemBarTintColor(tintManager: SystemBarTintManager): Int {
-        return R.color.text_color_2
+        return R.color.text_color_5
     }
 
     open fun toolbar2Setting(toolbar: Toolbar?){}

@@ -559,15 +559,15 @@
     <string name="ssdk_instagram">Instagram</string>
     <string name="ssdk_instagram_client_inavailable">Instagram版本过低或者没有安装，需要升级或安装Instagram才能使用！</string>
     <string name="ssdk_instapager_email_or_password_incorrect">Email或密码不正确</string>
-    <string formatted="false" name="ssdk_instapager_login_html">
-&lt;!DOCTYPE html>
-&lt;html>
-&lt;head>
-&lt;meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\">
-&lt;meta content=\"width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no\" id=\"viewport\" name=\"viewport\">
-&lt;meta content=\"yes\" name=\"apple-mobile-web-app-capable\">
-&lt;title>%s&lt;/title>
-&lt;style type=\"text/css\">
+    <string formatted="false" name="ssdk_instapager_login_html"><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\">
+<meta content=\"width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no\" id=\"viewport\" name=\"viewport\">
+<meta content=\"yes\" name=\"apple-mobile-web-app-capable\">
+<title>%s</title>
+<style type=\"text/css\">
 body{margin:0;padding:0}
 .inputstyle {
     -webkit-tap-highlight-color:rgba(255,255,255,0);
@@ -600,11 +600,11 @@ body{margin:0;padding:0}
 .error {
     color:red;
 }
-&lt;/style>
-&lt;/head>
+</style>
+</head>
 
-&lt;body>
-&lt;script type=\"text/javascript\">
+<body>
+<script type=\"text/javascript\">
 function login(form){
     var u=form[\"u\"].value,p=form[\"p\"].value;
     if(!u || !p)
@@ -612,19 +612,19 @@ function login(form){
     form[\"s\"].disabled = true;
     return true;
 }
-&lt;/script>
-&lt;form style=\"margin-top:45px;\" action=\"%s\" metho=\"get\" onsubmit=\"return login(this);\">
+</script>
+<form style=\"margin-top:45px;\" action=\"%s\" metho=\"get\" onsubmit=\"return login(this);\">
 %s
-&lt;div style=\"padding-left:15px;border-top:1px solid #E3E3E5;border-bottom:1px solid #E3E3E5;\">
- &lt;input type=\"hidden\" name=\"ID_SIGN\" value=\"OWELJSFPWECSFEW\"/>
- &lt;input class=\"inputstyle\" id=\"u\" name=\"u\" type=\"text\" value=\"%s\" placeholder=\"%s\" style=\"border-bottom:1px solid #E3E3E5;\"/>
- &lt;input class=\"inputstyle\" id=\"p\" name=\"p\" type=\"password\" placeholder=\"%s\"/>
-&lt;/div>
-&lt;p>&lt;input style=\"margin:0 auto;\" type=\"submit\" name=\"s\" value=\"  %s  \" class=\"btn\"/>&lt;/p>
-&lt;/form>
-&lt;/body>
-&lt;/html>
-</string>
+<div style=\"padding-left:15px;border-top:1px solid #E3E3E5;border-bottom:1px solid #E3E3E5;\">
+ <input type=\"hidden\" name=\"ID_SIGN\" value=\"OWELJSFPWECSFEW\"/>
+ <input class=\"inputstyle\" id=\"u\" name=\"u\" type=\"text\" value=\"%s\" placeholder=\"%s\" style=\"border-bottom:1px solid #E3E3E5;\"/>
+ <input class=\"inputstyle\" id=\"p\" name=\"p\" type=\"password\" placeholder=\"%s\"/>
+</div>
+<p><input style=\"margin:0 auto;\" type=\"submit\" name=\"s\" value=\"  %s  \" class=\"btn\"/></p>
+</form>
+</body>
+</html>
+]]></string>
     <string name="ssdk_instapaper">Instapaper</string>
     <string name="ssdk_instapaper_email">邮箱</string>
     <string name="ssdk_instapaper_login">登录</string>
